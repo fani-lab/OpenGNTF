@@ -1,3 +1,5 @@
+import itertools
+
 import pandas as pd
 import torch
 from tqdm import tqdm
@@ -9,9 +11,10 @@ import torch.nn.functional as F
 from sklearn.metrics import roc_auc_score
 from collections import defaultdict
 import pytrec_eval
+import gc
 
 
-def main(data, dataset_name, epochs=25, lr=0.001, test=False, full_subgraph="", graph_type="STE"):
+def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", eval_method="sum"):
     try:
         train_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/train{full_subgraph}-{graph_type}.pt')
         val_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/val{full_subgraph}-{graph_type}.pt')
@@ -24,7 +27,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, full_subgraph="", 
             transform = T.RandomLinkSplit(
                 disjoint_train_ratio=0.3,
                 neg_sampling_ratio=50.0,  # number of negative samples per each positive sample
-                add_negative_train_samples=True,
+                add_negative_train_samples=False,
                 edge_types=('expert', 'has', 'skill'),
                 rev_edge_types=None,
             )
@@ -45,12 +48,15 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, full_subgraph="", 
             torch.save(val_data, f)
         with open(f"../output/NewSplitMethod/{dataset_name}/test{full_subgraph}-{graph_type}.pt", "wb") as f:
             torch.save(test_data, f)
-
+    
     model = Model(hidden_channels=4, data=train_data, graph_type=graph_type)
-    # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    device = 'cpu'
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    # device = 'cpu'
     print(f"Device: '{device}'")
     model = model.to(device)
+    train_data = train_data.to(device)
+    val_data = val_data.to(device)
+    test_data = test_data.to(device)
 
     if graph_type == "SE":
         edge_label_index = train_data['expert', 'has', 'skill'].edge_label_index
@@ -67,7 +73,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, full_subgraph="", 
         neg_sampling_ratio=50.0,
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
-        batch_size=64,
+        batch_size=batch_size,
         shuffle=True,
     )
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
@@ -76,6 +82,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, full_subgraph="", 
         edge_label_index = val_data['expert', 'has', 'skill'].edge_label_index
         edge_label = val_data['expert', 'has', 'skill'].edge_label
         edge_type = ('expert', 'has', 'skill')
+
     else:
         edge_label_index = val_data['team', 'includes', 'expert'].edge_label_index
         edge_label = val_data['team', 'includes', 'expert'].edge_label
@@ -86,7 +93,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, full_subgraph="", 
         num_neighbors={key: [-1] for key in train_data.edge_types},
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
-        batch_size=3 * 64,
+        batch_size= batch_size,
         shuffle=False,
     )
 
@@ -104,7 +111,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, full_subgraph="", 
         num_neighbors={key: [-1] for key in train_data.edge_types},
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
-        batch_size=1024,
+        batch_size=batch_size,
         shuffle=False,
     )
 
@@ -157,7 +164,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, full_subgraph="", 
 
     if test:
         evaluate(model, test_loader, device,
-                 f"../output/NewSplitMethod/{dataset_name}/eval_e{epochs}_lr{lr}{full_subgraph}.csv", graph_type)
+                 f"../output/NewSplitMethod/{dataset_name}/eval_{eval_method}_e{epochs}_lr{lr}{full_subgraph}_{graph_type}.csv", graph_type, eval_method)
         # print(f"Test evaluation results:\n{df_mean}")
 
     return model
@@ -233,33 +240,101 @@ class Model(torch.nn.Module):
 
 def create_qrel_and_run(node1_index, node2_index, predictions, ground_truth, graph_type):
     print("Sorting...")
-    combined = list(zip(node1_index, node2_index, predictions, ground_truth))
-
-    # Sort by the third element (predictions)
-    combined_sorted = sorted(combined, key=lambda x: x[2])
+    # Sort combined elements by predictions using numpy for efficiency
+    combined_sorted = sorted(zip(node1_index, node2_index, predictions, ground_truth), key=lambda x: x[2], reverse=True)
     print("Creating qrel and run dictionaries...")
 
     qrel = defaultdict(dict)
     run = defaultdict(dict)
 
-    for idx1, idx2, pred, label in combined_sorted:
+    for idx1, idx2, pred, label in tqdm(combined_sorted, desc="Processing qrels and runs"):
         label_int = int(label)  # Ensure the label is an integer
         qrel[str(idx1)][str(idx2)] = label_int
         run[str(idx1)][str(idx2)] = float(pred)  # Ensure the prediction is a float
 
     # Convert defaultdict back to regular dict
-    qrel = dict(qrel)
-    run = dict(run)
-
-    return qrel, run
+    return dict(qrel), dict(run)
 
 
-def evaluate(model, test_loader, device, saving_path, graph_type):
+def merge_predictions(skills_list, preds, method):  # method:  "sum" / "fusion"
+    # Use defaultdict with float for accumulation
+    predicts = {}
+
+    # Precompute inverse for fusion method
+    if method == "fusion":
+        preds = {skill: {key: 1 / (60 + value) for key, value in experts.items()} for skill, experts in preds.items()}
+
+    # Accumulate the predictions based on the method
+    for skill in skills_list:
+        if skill in preds:
+            for expert_key, expert_prob_value in itertools.islice(preds[skill].items(), 10):
+                if expert_key in predicts.keys():
+                    predicts[expert_key] += expert_prob_value
+                else:
+                    predicts[expert_key] = expert_prob_value
+
+
+    # Create a tensor for sorting
+    sorted_predicts = sorted(predicts.items(), key=lambda x: x[1], reverse=True)
+    return dict(sorted_predicts)
+
+
+def create_runs_for_SE(skills_of_teams, skills_predictions, eval_method):
+    print("creating runs for Skill/Expert graph results...")
+    run = {}
+
+    for team, skills in tqdm(skills_of_teams.items(), desc="Processing teams"):
+
+        run[team] = merge_predictions(skills_list=skills, preds=skills_predictions, method=eval_method)
+
+    return run
+
+
+def evaluate(model, test_loader, device, saving_path, graph_type, eval_method):
     model.eval()
     all_ground_truth = []
     all_predictions = []
     all_node1_index = []
     all_node2_index = []
+    if graph_type == "SE":
+
+        # Load data
+        test_STE = torch.load(f'../output/NewSplitMethod/{saving_path.split("/")[3]}/test-STE.pt')
+        test_SE = torch.load(f'../output/NewSplitMethod/{saving_path.split("/")[3]}/test-SE.pt')
+
+        # Extract indices
+        test_SE_experts = test_SE['expert', 'has', 'skill'].edge_index[0, :]
+        test_SE_skills = test_SE['expert', 'has', 'skill'].edge_index[1, :]
+        teams_skills = test_STE['team', 'requires', 'skill']['edge_index']
+        test_teams_index = test_STE['team', 'includes', 'expert'].edge_index[0, :]
+        test_teams_experts_index = test_STE['team', 'includes', 'expert'].edge_index[1, :]
+        test_teams_label = test_STE['team', 'includes', 'expert'].edge_label
+
+        # Initialize an empty dictionary for skills of teams
+        skills_of_teams = {}
+
+        # Populate the dictionary
+        for key, value in zip(teams_skills[0, :], teams_skills[1, :]):
+            key_ = str(key.item())
+            if key_ in skills_of_teams:
+                skills_of_teams[key_].append(str(value.item()))
+            else:
+                skills_of_teams[key_] = [str(value.item())]
+
+        # Remove experts not in test_SE_experts from test_teams_experts_index
+        valid_expert_mask = torch.isin(test_teams_experts_index, test_SE_experts)
+        test_teams_index = test_teams_index[valid_expert_mask]
+        test_teams_experts_index = test_teams_experts_index[valid_expert_mask]
+        # test_teams_label = test_teams_label[valid_expert_mask]
+
+        # Remove skills not in test_SE_skills from skills_of_teams
+        valid_skills = set(test_SE_skills.numpy().astype(str))
+        skills_of_teams = {team: [skill for skill in skills if skill in valid_skills]
+                           for team, skills in skills_of_teams.items()}
+
+        # Ensure no empty skill lists are kept
+        skills_of_teams = {team: skills for team, skills in skills_of_teams.items() if skills}
+
 
     for i, sampled_data in enumerate(test_loader):
         with torch.no_grad():
@@ -268,12 +343,12 @@ def evaluate(model, test_loader, device, saving_path, graph_type):
 
             if graph_type == "SE":
                 ground_truth = sampled_data['expert', 'has', 'skill'].edge_label.cpu().numpy()
-                node1_index = sampled_data['expert', 'has', 'skill'].edge_index[0, :].cpu().numpy()
-                node2_index = sampled_data['expert', 'has', 'skill'].edge_index[1, :].cpu().numpy()
+                node1_index = sampled_data['expert', 'has', 'skill'].edge_index[0, :].cpu().numpy()  # expert
+                node2_index = sampled_data['expert', 'has', 'skill'].edge_index[1, :].cpu().numpy()  # Skill
             else:
                 ground_truth = sampled_data['team', 'includes', 'expert'].edge_label.cpu().numpy()
-                node1_index = sampled_data['team', 'includes', 'expert'].edge_index[0, :].cpu().numpy()
-                node2_index = sampled_data['team', 'includes', 'expert'].edge_index[1, :].cpu().numpy()
+                node1_index = sampled_data['team', 'includes', 'expert'].edge_index[0, :].cpu().numpy()  # team
+                node2_index = sampled_data['team', 'includes', 'expert'].edge_index[1, :].cpu().numpy()  # expert
 
             all_node1_index.extend(node1_index)
             all_node2_index.extend(node2_index)
@@ -281,10 +356,22 @@ def evaluate(model, test_loader, device, saving_path, graph_type):
             all_ground_truth.extend(ground_truth)
 
     if graph_type == "SE":
-        qrels, runs = create_qrel_and_run(all_node2_index, all_node1_index, all_predictions, all_ground_truth,
-                                          graph_type)
+        qrels_, runs_ = create_qrel_and_run(all_node2_index, all_node1_index, all_predictions, all_ground_truth,
+                                            graph_type)
+        qrels = {}
+
+        for team_id_, expert_id_ in zip(test_teams_index, test_teams_experts_index):
+            team_id, expert_id = str(team_id_.item()), str(expert_id_.item())
+            if team_id not in qrels:
+                qrels[team_id] = {}
+            qrels[team_id][expert_id] = 1
+
+        runs = create_runs_for_SE(skills_of_teams, runs_, eval_method=eval_method)
+
     else:
-        qrels, runs = create_qrel_and_run(all_node1_index, all_node2_index, all_predictions, all_ground_truth, graph_type)
+        qrels, runs = create_qrel_and_run(all_node1_index, all_node2_index, all_predictions, all_ground_truth,
+                                          graph_type)
+    del qrels_, runs_
 
     aucroc = roc_auc_score(all_ground_truth, all_predictions)
     print(f'AUC-ROC: {aucroc}')
