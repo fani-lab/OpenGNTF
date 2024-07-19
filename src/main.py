@@ -9,6 +9,8 @@ import torch
 def main(params: dict):
     subgraph = "-full_subgraph" if params["full_subgraph"] == 1 else ""
     graph_typ = params["graph_type"]
+    gnn_model = params["gnn_model"]
+
     for dataset_pth in params["data_path"]:
         print(f'dataset path = {dataset_pth}')
         try:
@@ -80,5 +82,6 @@ if __name__ == '__main__':
         "graph_type": "STE",  # STE -> Skill/Team/Expert, SE -> Skill/Expert
         "full_subgraph": 0,  # 1 -> complete subgraph, 0 -> non-complete subgraph
         "eval_method": "sum",  # "sum" -> normal, "fusion" -> 1/(60+x)
+        "gnn_model" : "gin", # gs, gin, gat, gatv2, han, gine
     }
     main(parameters)

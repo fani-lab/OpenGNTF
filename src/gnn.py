@@ -13,8 +13,11 @@ from collections import defaultdict
 import pytrec_eval
 import gc
 
+# import all gnn models
+from gin import GIN
+from torch.nn import Linear, Sequential, BatchNorm1d, ReLU
 
-def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", eval_method="sum"):
+def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", gnn_model="gs", eval_method="sum"):
     try:
         train_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/train{full_subgraph}-{graph_type}.pt')
         val_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/val{full_subgraph}-{graph_type}.pt')
@@ -49,7 +52,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
         with open(f"../output/NewSplitMethod/{dataset_name}/test{full_subgraph}-{graph_type}.pt", "wb") as f:
             torch.save(test_data, f)
     
-    model = Model(hidden_channels=4, data=train_data, graph_type=graph_type)
+    model = Model(hidden_channels=4, data=train_data, graph_type=graph_type, gnn_model = gnn_model)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # device = 'cpu'
     print(f"Device: '{device}'")
@@ -205,7 +208,7 @@ class Classifier(torch.nn.Module):
 
 
 class Model(torch.nn.Module):
-    def __init__(self, hidden_channels, data, graph_type):
+    def __init__(self, hidden_channels, data, graph_type, gnn_model):
         super().__init__()
         # Since the dataset does not come with rich features, we also learn two
         # embedding matrices:
@@ -213,8 +216,13 @@ class Model(torch.nn.Module):
         self.expert_emb = torch.nn.Embedding(data['expert'].num_nodes, hidden_channels)
         if graph_type != "SE":
             self.team_emb = torch.nn.Embedding(data['team'].num_nodes, hidden_channels)
-        # Instantiate homogeneous GNN:
-        self.gnn = GNN(hidden_channels)
+
+        # Instantiate homogeneous GNN
+        if gnn_model == 'gs':
+            self.gnn = GNN(hidden_channels)
+        elif gnn_mode == 'gin':
+            self.gnn = GIN(hidden_channels)
+
         # Convert GNN model into a heterogeneous variant:
         self.gnn = to_hetero(self.gnn, metadata=data.metadata())
         self.classifier = Classifier()
