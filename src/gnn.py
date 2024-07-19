@@ -382,7 +382,7 @@ def evaluate(model, test_loader, device, saving_path, graph_type, eval_method):
     # del qrels_, runs_
 
     aucroc = roc_auc_score(all_ground_truth, all_predictions)
-    print(f'AUC-ROC: {aucroc}')
+    print(f'AUC-ROC: {aucroc * 100}')
 
     metrics_to_evaluate = {
         'P_2', 'P_5', 'P_10', 'recall_2', 'recall_5', 'recall_10',
@@ -398,7 +398,7 @@ def evaluate(model, test_loader, device, saving_path, graph_type, eval_method):
         ) for metric in next(iter(metrics.values())).keys()}
         aggregated_metrics['aucroc'] = aucroc
         for metric, score in aggregated_metrics.items():
-            print(f'{metric} average: {score}')
+            print(f'{metric} average: {score * 100}')
         df = pd.DataFrame([aggregated_metrics])
         df.to_csv(saving_path, index=False)
         print(f'Aggregated metrics saved to {saving_path}')
