@@ -26,7 +26,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
         if graph_type == "SE":
             transform = T.RandomLinkSplit(
                 disjoint_train_ratio=0.3,
-                neg_sampling_ratio=50.0,  # number of negative samples per each positive sample
+                neg_sampling_ratio=5.0,  # number of negative samples per each positive sample
                 add_negative_train_samples=False,
                 edge_types=('expert', 'has', 'skill'),
                 rev_edge_types=None,
@@ -34,7 +34,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
         else:
             transform = T.RandomLinkSplit(
                 disjoint_train_ratio=0.3,
-                neg_sampling_ratio=50.0,  # number of negative samples per each positive sample
+                neg_sampling_ratio=5.0,  # number of negative samples per each positive sample
                 add_negative_train_samples=True,
                 edge_types=('team', 'includes', 'expert'),
                 rev_edge_types=('expert', 'rev_includes', 'team'),
@@ -70,7 +70,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
     train_loader = LinkNeighborLoader(
         data=train_data,
         num_neighbors={key: [-1] for key in train_data.edge_types},
-        neg_sampling_ratio=50.0,
+        neg_sampling_ratio=5.0,
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
         batch_size=batch_size,
@@ -371,7 +371,7 @@ def evaluate(model, test_loader, device, saving_path, graph_type, eval_method):
     else:
         qrels, runs = create_qrel_and_run(all_node1_index, all_node2_index, all_predictions, all_ground_truth,
                                           graph_type)
-    del qrels_, runs_
+    # del qrels_, runs_
 
     aucroc = roc_auc_score(all_ground_truth, all_predictions)
     print(f'AUC-ROC: {aucroc}')
