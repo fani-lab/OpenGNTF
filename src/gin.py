@@ -11,10 +11,10 @@ class GIN(torch.nn.Module):
     def __init__(self, dim_h):
         super(GIN, self).__init__()
         self.conv1 = GINConv(
-            Sequential(Linear(dim_h, dim_h), BatchNorm1d(dim_h), ReLU(),
+            Sequential(Linear(dim_h, dim_h), ReLU(),
                        Linear(dim_h, dim_h), ReLU()))
         self.conv2 = GINConv(
-            Sequential(Linear(dim_h, dim_h), BatchNorm1d(dim_h), ReLU(),
+            Sequential(Linear(dim_h, dim_h), ReLU(),
                        Linear(dim_h, dim_h), ReLU()))
 
     def forward(self, x, edge_index):

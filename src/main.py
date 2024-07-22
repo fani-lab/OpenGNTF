@@ -52,7 +52,7 @@ def main(params: dict):
             print('data saved')
 
         final_model = gnn.main(data, dataset_pth.split('/')[-2], epochs=params["epoch"], lr=params["lr"],
-                               batch_size=params["batch_size"], test=True, full_subgraph=subgraph, graph_type=graph_typ,
+                               batch_size=params["batch_size"], test=True, full_subgraph=subgraph, graph_type=graph_typ, gnn_model=gnn_model,
                                eval_method=params["eval_method"])
 
         torch.save(final_model, '../output/NewSplitMethod' + '/' + dataset_pth.split('/')[-2] + f'/model_e{params["epoch"]}_lr{params["lr"]}{subgraph}_{graph_typ}.pt')
@@ -76,12 +76,12 @@ if __name__ == '__main__':
             # "../data/imdb/",
             "../data/dblp/",
         ],
-        "epoch": 10,
+        "epoch": 20,
         "lr": 0.001,
         "batch_size": 1024,
-        "graph_type": "SE",  # STE -> Skill/Team/Expert, SE -> Skill/Expert
+        "graph_type": "STE",  # STE -> Skill/Team/Expert, SE -> Skill/Expert
         "full_subgraph": 0,  # 1 -> complete subgraph, 0 -> non-complete subgraph
         "eval_method": "sum",  # "sum" -> normal, "fusion" -> 1/(60+x)
-        "gnn_model" : "gs", # gs, gin, gat, gatv2, han, gine
+        "gnn_model" : "gatv2", # gs, gin, gat, gatv2, han, gine
     }
     main(parameters)

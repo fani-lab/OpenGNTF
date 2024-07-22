@@ -14,7 +14,12 @@ import pytrec_eval
 import gc
 
 # import all gnn models
+from gs import GS
 from gin import GIN
+from gat import GAT
+from gatv2 import GATv2
+from gine import GINE
+
 from torch.nn import Linear, Sequential, BatchNorm1d, ReLU
 
 def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", gnn_model="gs", eval_method="sum"):
@@ -30,7 +35,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
             transform = T.RandomLinkSplit(
                 disjoint_train_ratio=0.3,
                 neg_sampling_ratio=5.0,  # number of negative samples per each positive sample
-                add_negative_train_samples=False,
+                add_negative_train_samples=True,
                 edge_types=('expert', 'has', 'skill'),
                 rev_edge_types=None,
             )
@@ -173,18 +178,6 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
     return model
 
 
-class GNN(torch.nn.Module):
-    def __init__(self, hidden_channels):
-        super().__init__()
-        self.conv1 = SAGEConv(hidden_channels, hidden_channels)
-        self.conv2 = SAGEConv(hidden_channels, hidden_channels)
-
-    def forward(self, x, edge_index):
-        x = F.relu(self.conv1(x, edge_index))
-        x = self.conv2(x, edge_index)
-        return x
-
-
 # Our final classifier applies the dot-product between source and destination
 # node embeddings to derive edge-level predictions:
 class Classifier(torch.nn.Module):
@@ -214,14 +207,23 @@ class Model(torch.nn.Module):
         # embedding matrices:
         self.skill_emb = torch.nn.Embedding(data['skill'].num_nodes, hidden_channels)
         self.expert_emb = torch.nn.Embedding(data['expert'].num_nodes, hidden_channels)
+        self.gnn_model = gnn_model
         if graph_type != "SE":
             self.team_emb = torch.nn.Embedding(data['team'].num_nodes, hidden_channels)
 
         # Instantiate homogeneous GNN
         if gnn_model == 'gs':
-            self.gnn = GNN(hidden_channels)
-        elif gnn_mode == 'gin':
+            self.gnn = GS(hidden_channels)
+        elif gnn_model == 'gin':
             self.gnn = GIN(hidden_channels)
+        elif gnn_model == 'gat':
+            self.gnn = GAT(hidden_channels)
+        elif gnn_model == 'gatv2':
+            self.gnn = GATv2(hidden_channels)
+        # elif gnn_model == 'han':
+        #     self.gnn = HAN(hidden_channels)
+        elif gnn_model == 'gine':
+            self.gnn = GINE(hidden_channels)
 
         # Convert GNN model into a heterogeneous variant:
         self.gnn = to_hetero(self.gnn, metadata=data.metadata())
@@ -237,7 +239,14 @@ class Model(torch.nn.Module):
             x_dict["team"] = self.team_emb(data["team"].node_id)
         # `x_dict` holds feature matrices of all node types
         # `edge_index_dict` holds all edge indices of all edge types
-        x_dict = self.gnn(x_dict, data.edge_index_dict)
+        if self.gnn_model == 'gine':
+            # we have to provide the set of edge attributes for gine
+            self.edge_attr_dict = {}
+            for edge_type in data.edge_types:
+                self.edge_attr_dict[edge_type] = data[edge_type].edge_attr.view(-1, 1).float()
+            x_dict = self.gnn(x_dict, data.edge_index_dict, self.edge_attr_dict)
+        else:
+            x_dict = self.gnn(x_dict, data.edge_index_dict)
         if self.graph_type == "SE":
             pred = self.classifier(x_dict["skill"], x_dict["expert"], data["expert", "has", "skill"].edge_label_index)
         else:
