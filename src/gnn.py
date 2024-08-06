@@ -57,7 +57,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
         with open(f"../output/NewSplitMethod/{dataset_name}/test{full_subgraph}-{graph_type}.pt", "wb") as f:
             torch.save(test_data, f)
     
-    model = Model(hidden_channels=4, data=train_data, graph_type=graph_type, gnn_model = gnn_model)
+    model = Model(hidden_channels=64, data=train_data, graph_type=graph_type, gnn_model = gnn_model)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # device = 'cpu'
     print(f"Device: '{device}'")

@@ -76,12 +76,12 @@ if __name__ == '__main__':
             # "../data/imdb/",
             "../data/dblp/",
         ],
-        "epoch": 20,
+        "epoch": 5,
         "lr": 0.001,
         "batch_size": 1024,
-        "graph_type": "STE",  # STE -> Skill/Team/Expert, SE -> Skill/Expert
+        "graph_type": "SE",  # STE -> Skill/Team/Expert, SE -> Skill/Expert
         "full_subgraph": 0,  # 1 -> complete subgraph, 0 -> non-complete subgraph
-        "eval_method": "sum",  # "sum" -> normal, "fusion" -> 1/(60+x)
-        "gnn_model" : "gatv2", # gs, gin, gat, gatv2, han, gine
+        "eval_method": "fusion",  # "sum" -> normal, "fusion" -> 1/(60+x)
+        "gnn_model" : "gin", # gs, gin, gat, gatv2, han, gine
     }
     main(parameters)
