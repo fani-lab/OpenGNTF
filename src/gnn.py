@@ -13,8 +13,16 @@ from collections import defaultdict
 import pytrec_eval
 import gc
 
+# import all gnn models
+from gs import GS
+from gin import GIN
+from gat import GAT
+from gatv2 import GATv2
+from gine import GINE
 
-def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", eval_method="sum"):
+from torch.nn import Linear, Sequential, BatchNorm1d, ReLU
+
+def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", gnn_model="gs", eval_method="sum"):
     try:
         train_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/train{full_subgraph}-{graph_type}.pt')
         val_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/val{full_subgraph}-{graph_type}.pt')
@@ -26,15 +34,15 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
         if graph_type == "SE":
             transform = T.RandomLinkSplit(
                 disjoint_train_ratio=0.3,
-                neg_sampling_ratio=50.0,  # number of negative samples per each positive sample
-                add_negative_train_samples=False,
+                neg_sampling_ratio=5.0,  # number of negative samples per each positive sample
+                add_negative_train_samples=True,
                 edge_types=('expert', 'has', 'skill'),
                 rev_edge_types=None,
             )
         else:
             transform = T.RandomLinkSplit(
                 disjoint_train_ratio=0.3,
-                neg_sampling_ratio=50.0,  # number of negative samples per each positive sample
+                neg_sampling_ratio=5.0,  # number of negative samples per each positive sample
                 add_negative_train_samples=True,
                 edge_types=('team', 'includes', 'expert'),
                 rev_edge_types=('expert', 'rev_includes', 'team'),
@@ -49,7 +57,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
         with open(f"../output/NewSplitMethod/{dataset_name}/test{full_subgraph}-{graph_type}.pt", "wb") as f:
             torch.save(test_data, f)
     
-    model = Model(hidden_channels=4, data=train_data, graph_type=graph_type)
+    model = Model(hidden_channels=64, data=train_data, graph_type=graph_type, gnn_model = gnn_model)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # device = 'cpu'
     print(f"Device: '{device}'")
@@ -70,7 +78,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
     train_loader = LinkNeighborLoader(
         data=train_data,
         num_neighbors={key: [-1] for key in train_data.edge_types},
-        neg_sampling_ratio=50.0,
+        neg_sampling_ratio=5.0,
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
         batch_size=batch_size,
@@ -170,18 +178,6 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
     return model
 
 
-class GNN(torch.nn.Module):
-    def __init__(self, hidden_channels):
-        super().__init__()
-        self.conv1 = SAGEConv(hidden_channels, hidden_channels)
-        self.conv2 = SAGEConv(hidden_channels, hidden_channels)
-
-    def forward(self, x, edge_index):
-        x = F.relu(self.conv1(x, edge_index))
-        x = self.conv2(x, edge_index)
-        return x
-
-
 # Our final classifier applies the dot-product between source and destination
 # node embeddings to derive edge-level predictions:
 class Classifier(torch.nn.Module):
@@ -205,16 +201,30 @@ class Classifier(torch.nn.Module):
 
 
 class Model(torch.nn.Module):
-    def __init__(self, hidden_channels, data, graph_type):
+    def __init__(self, hidden_channels, data, graph_type, gnn_model):
         super().__init__()
         # Since the dataset does not come with rich features, we also learn two
         # embedding matrices:
         self.skill_emb = torch.nn.Embedding(data['skill'].num_nodes, hidden_channels)
         self.expert_emb = torch.nn.Embedding(data['expert'].num_nodes, hidden_channels)
+        self.gnn_model = gnn_model
         if graph_type != "SE":
             self.team_emb = torch.nn.Embedding(data['team'].num_nodes, hidden_channels)
-        # Instantiate homogeneous GNN:
-        self.gnn = GNN(hidden_channels)
+
+        # Instantiate homogeneous GNN
+        if gnn_model == 'gs':
+            self.gnn = GS(hidden_channels)
+        elif gnn_model == 'gin':
+            self.gnn = GIN(hidden_channels)
+        elif gnn_model == 'gat':
+            self.gnn = GAT(hidden_channels)
+        elif gnn_model == 'gatv2':
+            self.gnn = GATv2(hidden_channels)
+        # elif gnn_model == 'han':
+        #     self.gnn = HAN(hidden_channels)
+        elif gnn_model == 'gine':
+            self.gnn = GINE(hidden_channels)
+
         # Convert GNN model into a heterogeneous variant:
         self.gnn = to_hetero(self.gnn, metadata=data.metadata())
         self.classifier = Classifier()
@@ -229,7 +239,14 @@ class Model(torch.nn.Module):
             x_dict["team"] = self.team_emb(data["team"].node_id)
         # `x_dict` holds feature matrices of all node types
         # `edge_index_dict` holds all edge indices of all edge types
-        x_dict = self.gnn(x_dict, data.edge_index_dict)
+        if self.gnn_model == 'gine':
+            # we have to provide the set of edge attributes for gine
+            self.edge_attr_dict = {}
+            for edge_type in data.edge_types:
+                self.edge_attr_dict[edge_type] = data[edge_type].edge_attr.view(-1, 1).float()
+            x_dict = self.gnn(x_dict, data.edge_index_dict, self.edge_attr_dict)
+        else:
+            x_dict = self.gnn(x_dict, data.edge_index_dict)
         if self.graph_type == "SE":
             pred = self.classifier(x_dict["skill"], x_dict["expert"], data["expert", "has", "skill"].edge_label_index)
         else:
@@ -371,10 +388,10 @@ def evaluate(model, test_loader, device, saving_path, graph_type, eval_method):
     else:
         qrels, runs = create_qrel_and_run(all_node1_index, all_node2_index, all_predictions, all_ground_truth,
                                           graph_type)
-    del qrels_, runs_
+    # del qrels_, runs_
 
     aucroc = roc_auc_score(all_ground_truth, all_predictions)
-    print(f'AUC-ROC: {aucroc}')
+    print(f'AUC-ROC: {aucroc * 100}')
 
     metrics_to_evaluate = {
         'P_2', 'P_5', 'P_10', 'recall_2', 'recall_5', 'recall_10',
@@ -390,7 +407,7 @@ def evaluate(model, test_loader, device, saving_path, graph_type, eval_method):
         ) for metric in next(iter(metrics.values())).keys()}
         aggregated_metrics['aucroc'] = aucroc
         for metric, score in aggregated_metrics.items():
-            print(f'{metric} average: {score}')
+            print(f'{metric} average: {score * 100}')
         df = pd.DataFrame([aggregated_metrics])
         df.to_csv(saving_path, index=False)
         print(f'Aggregated metrics saved to {saving_path}')
