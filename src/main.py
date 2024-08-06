@@ -9,6 +9,8 @@ import torch
 def main(params: dict):
     subgraph = "-full_subgraph" if params["full_subgraph"] == 1 else ""
     graph_typ = params["graph_type"]
+    gnn_model = params["gnn_model"]
+
     for dataset_pth in params["data_path"]:
         print(f'dataset path = {dataset_pth}')
         try:
@@ -50,23 +52,36 @@ def main(params: dict):
             print('data saved')
 
         final_model = gnn.main(data, dataset_pth.split('/')[-2], epochs=params["epoch"], lr=params["lr"],
-                               batch_size=params["batch_size"], test=True, full_subgraph=subgraph, graph_type=graph_typ,
+                               batch_size=params["batch_size"], test=True, full_subgraph=subgraph, graph_type=graph_typ, gnn_model=gnn_model,
                                eval_method=params["eval_method"])
 
         torch.save(final_model, '../output/NewSplitMethod' + '/' + dataset_pth.split('/')[-2] + f'/model_e{params["epoch"]}_lr{params["lr"]}{subgraph}_{graph_typ}.pt')
 
 
 if __name__ == '__main__':
+    # parameters = {
+    #     "data_path": [
+    #         # "../data/imdb/",
+    #         "../data/dblp/",
+    #     ],
+    #     "epoch": 4,
+    #     "lr": 0.001,
+    #     "batch_size": 1024,
+    #     "graph_type": "SE",  # STE -> Skill/Team/Expert, SE -> Skill/Expert
+    #     "full_subgraph": 1,  # 1 -> complete subgraph, 0 -> non-complete subgraph
+    #     "eval_method": "sum",  # "sum" -> normal, "fusion" -> 1/(60+x)
+    # }
     parameters = {
         "data_path": [
             # "../data/imdb/",
             "../data/dblp/",
         ],
-        "epoch": 4,
+        "epoch": 10,
         "lr": 0.001,
         "batch_size": 1024,
         "graph_type": "SE",  # STE -> Skill/Team/Expert, SE -> Skill/Expert
-        "full_subgraph": 1,  # 1 -> complete subgraph, 0 -> non-complete subgraph
-        "eval_method": "sum",  # "sum" -> normal, "fusion" -> 1/(60+x)
+        "full_subgraph": 0,  # 1 -> complete subgraph, 0 -> non-complete subgraph
+        "eval_method": "fusion",  # "sum" -> normal, "fusion" -> 1/(60+x)
+        "gnn_model" : "gs", # gs, gin, gat, gatv2, han, gine
     }
     main(parameters)
