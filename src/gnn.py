@@ -172,7 +172,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
 
     if test:
         evaluate(model, test_loader, device,
-                 f"../output/NewSplitMethod/{dataset_name}/eval_{eval_method}_e{epochs}_lr{lr}{full_subgraph}_{graph_type}.csv", graph_type, eval_method)
+                 f"../output/NewSplitMethod/{dataset_name}/eval_{gnn_model}_e{epochs}_lr{lr}_fs{0 if full_subgraph == '' else 1}_{graph_type}_{eval_method}.csv", graph_type, eval_method)
         # print(f"Test evaluation results:\n{df_mean}")
 
     return model
