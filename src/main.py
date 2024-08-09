@@ -24,6 +24,9 @@ def main(params: dict):
                 elif graph_typ == "STE":
                     data = torch.load(dataset_pth + 'data-full_subgraph-STE.pt')
                     print('data - complete subgraph for STE graph loaded')
+                elif graph_typ == "STEL":
+                    data = torch.load(dataset_pth + 'data-full_subgraph-STEL.pt')
+                    print('data - complete subgraph for STEL graph loaded')
             else:
                 if graph_typ == "SE":
                     data = torch.load(dataset_pth + 'data-SE.pt')
@@ -31,6 +34,9 @@ def main(params: dict):
                 elif graph_typ == "STE":
                     data = torch.load(dataset_pth + 'data-STE.pt')
                     print('data - non-complete for STE graph loaded')
+                elif graph_typ == "STEL":
+                    data = torch.load(dataset_pth + 'data-STEL.pt')
+                    print('data - non-complete for STEL graph loaded')
 
         except FileNotFoundError:
             print("preparing data ...")

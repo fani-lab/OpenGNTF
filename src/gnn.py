@@ -57,14 +57,14 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
         with open(f"../output/NewSplitMethod/{dataset_name}/test{full_subgraph}-{graph_type}.pt", "wb") as f:
             torch.save(test_data, f)
     
-    model = Model(hidden_channels=64, data=train_data, graph_type=graph_type, gnn_model = gnn_model)
+    model = Model(hidden_channels=64, data=train_data, graph_type=graph_type, gnn_model=gnn_model)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # device = 'cpu'
     print(f"Device: '{device}'")
     model = model.to(device)
-    train_data = train_data.to(device)
-    val_data = val_data.to(device)
-    test_data = test_data.to(device)
+    # train_data = train_data.to(device)
+    # val_data = val_data.to(device)
+    # test_data = test_data.to(device)
 
     if graph_type == "SE":
         edge_label_index = train_data['expert', 'has', 'skill'].edge_label_index
@@ -98,7 +98,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
 
     val_loader = LinkNeighborLoader(
         data=val_data,
-        num_neighbors={key: [-1] for key in train_data.edge_types},
+        num_neighbors={key: [-1] for key in val_data.edge_types},
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
         batch_size= batch_size,
@@ -116,7 +116,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
 
     test_loader = LinkNeighborLoader(
         data=test_data,
-        num_neighbors={key: [-1] for key in train_data.edge_types},
+        num_neighbors={key: [-1] for key in test_data.edge_types},
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
         batch_size=batch_size,
@@ -177,6 +177,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
 
     return model
 
+torch.manual_seed(42)
 
 # Our final classifier applies the dot-product between source and destination
 # node embeddings to derive edge-level predictions:
@@ -210,6 +211,8 @@ class Model(torch.nn.Module):
         self.gnn_model = gnn_model
         if graph_type != "SE":
             self.team_emb = torch.nn.Embedding(data['team'].num_nodes, hidden_channels)
+        if graph_type == "STEL":
+            self.location_emb = torch.nn.Embedding(data['location'].num_nodes, hidden_channels)
 
         # Instantiate homogeneous GNN
         if gnn_model == 'gs':
@@ -237,6 +240,9 @@ class Model(torch.nn.Module):
         }
         if self.graph_type != "SE":
             x_dict["team"] = self.team_emb(data["team"].node_id)
+        if self.graph_type == "STEL":
+            x_dict["location"] = self.location_emb(data["location"].node_id)
+
         # `x_dict` holds feature matrices of all node types
         # `edge_index_dict` holds all edge indices of all edge types
         if self.gnn_model == 'gine':
@@ -247,11 +253,18 @@ class Model(torch.nn.Module):
             x_dict = self.gnn(x_dict, data.edge_index_dict, self.edge_attr_dict)
         else:
             x_dict = self.gnn(x_dict, data.edge_index_dict)
+
         if self.graph_type == "SE":
             pred = self.classifier(x_dict["skill"], x_dict["expert"], data["expert", "has", "skill"].edge_label_index)
+        elif self.graph_type == "STEL":
+            # Add prediction logic for the STEL graph type
+            pred = self.classifier(x_dict["expert"], x_dict["team"],
+                                   data["team", "includes", "expert"].edge_label_index)
+            # Optionally, you can add other types of prediction involving location if needed
         else:
             pred = self.classifier(x_dict["expert"], x_dict["team"],
                                    data["team", "includes", "expert"].edge_label_index)
+
         return pred
 
 
