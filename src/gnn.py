@@ -22,11 +22,11 @@ from gine import GINE
 
 from torch.nn import Linear, Sequential, BatchNorm1d, ReLU
 
-def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", gnn_model="gs", eval_method="sum"):
+def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", dim=64, num_neighbors=None, gnn_model="gs", eval_method="sum"):
     try:
-        train_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/train{full_subgraph}-{graph_type}.pt')
-        val_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/val{full_subgraph}-{graph_type}.pt')
-        test_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/test{full_subgraph}-{graph_type}.pt')
+        train_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/train.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
+        val_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/val.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
+        test_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/test.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
         print('splitted data loaded')
     except:
         print('splitting data')
@@ -50,14 +50,14 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
 
         train_data, val_data, test_data = transform(data)
         print("saving splitted files")
-        with open(f"../output/NewSplitMethod/{dataset_name}/train{full_subgraph}-{graph_type}.pt", "wb") as f:
+        with open(f"../output/NewSplitMethod/{dataset_name}/train.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt", "wb") as f:
             torch.save(train_data, f)
-        with open(f"../output/NewSplitMethod/{dataset_name}/val{full_subgraph}-{graph_type}.pt", "wb") as f:
+        with open(f"../output/NewSplitMethod/{dataset_name}/val.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt", "wb") as f:
             torch.save(val_data, f)
-        with open(f"../output/NewSplitMethod/{dataset_name}/test{full_subgraph}-{graph_type}.pt", "wb") as f:
+        with open(f"../output/NewSplitMethod/{dataset_name}/test.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt", "wb") as f:
             torch.save(test_data, f)
     
-    model = Model(hidden_channels=64, data=train_data, graph_type=graph_type, gnn_model=gnn_model)
+    model = Model(hidden_channels=dim, data=train_data, graph_type=graph_type, gnn_model=gnn_model)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # device = 'cpu'
     print(f"Device: '{device}'")
@@ -77,7 +77,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
 
     train_loader = LinkNeighborLoader(
         data=train_data,
-        num_neighbors={key: [-1] for key in train_data.edge_types},
+        num_neighbors={key: [-1] for key in train_data.edge_types} if num_neighbors is None else num_neighbors,
         neg_sampling_ratio=5.0,
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
@@ -98,7 +98,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
 
     val_loader = LinkNeighborLoader(
         data=val_data,
-        num_neighbors={key: [-1] for key in val_data.edge_types},
+        num_neighbors={key: [-1] for key in val_data.edge_types} if num_neighbors is None else num_neighbors,
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
         batch_size= batch_size,
@@ -116,7 +116,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
 
     test_loader = LinkNeighborLoader(
         data=test_data,
-        num_neighbors={key: [-1] for key in test_data.edge_types},
+        num_neighbors={key: [-1] for key in test_data.edge_types} if num_neighbors is None else num_neighbors,
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
         batch_size=batch_size,
@@ -172,12 +172,12 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
 
     if test:
         evaluate(model, test_loader, device,
-                 f"../output/NewSplitMethod/{dataset_name}/eval_{gnn_model}_e{epochs}_lr{lr}_fs{0 if full_subgraph == '' else 1}_{graph_type}_{eval_method}.csv", graph_type, eval_method)
+                 f"../output/NewSplitMethod/{dataset_name}/eval.{gnn_model}.e{epochs}.lr{lr}.d{dim}.nn{num_neighbors}.fs{0 if full_subgraph == '' else 1}.{graph_type}.{eval_method}.csv", graph_type, eval_method)
         # print(f"Test evaluation results:\n{df_mean}")
 
     return model
 
-torch.manual_seed(42)
+# torch.manual_seed(42) already defined seed in main.py
 
 # Our final classifier applies the dot-product between source and destination
 # node embeddings to derive edge-level predictions:

@@ -11,6 +11,8 @@ def main(params: dict):
     subgraph = "-full_subgraph" if params["full_subgraph"] == 1 else ""
     fs = params["full_subgraph"]    # a small token identifier for output files; 1 = full_subgraph used
     graph_typ = params["graph_type"]
+    dim = params["dim"]
+    num_neighbors = params["num_neighbors"]
     gnn_model = params["gnn_model"]
     eval_method = params["eval_method"]
 
@@ -19,7 +21,7 @@ def main(params: dict):
         try:
             if params["full_subgraph"] == 1:
                 if graph_typ == "SE":
-                    data = torch.load(dataset_pth + 'data-full_subgraph-SE.pt')
+                    data = torch.load(dataset_pth + 'data.full_subgraph.SE.pt')
                     print('data - complete subgraph for SE graph loaded')
                 elif graph_typ == "STE":
                     data = torch.load(dataset_pth + 'data-full_subgraph-STE.pt')
@@ -61,10 +63,10 @@ def main(params: dict):
             print('data saved')
 
         final_model = gnn.main(data, dataset_pth.split('/')[-2], epochs=params["epoch"], lr=params["lr"],
-                               batch_size=params["batch_size"], test=True, full_subgraph=subgraph, graph_type=graph_typ, gnn_model=gnn_model,
+                               batch_size=params["batch_size"], test=True, full_subgraph=subgraph, graph_type=graph_typ, dim=dim, num_neighbors=num_neighbors, gnn_model=gnn_model,
                                eval_method=eval_method)
-
-        torch.save(final_model, '../output/NewSplitMethod' + '/' + dataset_pth.split('/')[-2] + f'/model_{gnn_model}_e{params["epoch"]}_lr{params["lr"]}_fs{fs}_{graph_typ}_{eval_method}.pt')
+        # nn = None means all neighbors were sampled during subgraph formation
+        torch.save(final_model, '../output/NewSplitMethod' + '/' + dataset_pth.split('/')[-2] + f'/model.{gnn_model}.e{params["epoch"]}.lr{params["lr"]}.d{dim}.nn{num_neighbors}.fs{fs}.{graph_typ}.{eval_method}.pt')
 
 
 # sample argument based command
@@ -79,9 +81,11 @@ if __name__ == '__main__':
             # "../data/imdb/",
             "../data/dblp/",
         ],
-        "epoch": 10,
+        "epoch": 5, # initially it was 10
         "lr": 0.001,
-        "batch_size": 1024,
+        "batch_size": 128, # initially it was 1024
+        "num_neighbors" : [20,10],
+        "dim" : 64, # initially 64
         "graph_type": "STE",  # STE -> Skill/Team/Expert, SE -> Skill/Expert
         "full_subgraph": 0,  # 1 -> complete subgraph, 0 -> non-complete subgraph
         "eval_method": "sum",  # "sum" -> normal, "fusion" -> 1/(60+x)
@@ -95,6 +99,8 @@ if __name__ == '__main__':
     parser.add_argument('--data_path', type=str, nargs ='+', help='Data to use')
     parser.add_argument('--gnn_model', type=str, help='GNN model to use')
     parser.add_argument('--graph_type', type=str, help='Type of graph')
+    parser.add_argument('--dim', type=int, help='dimension of hidden layers')
+    parser.add_argument('--num_neighbors', type=int, nargs='+', help='Number of neighbors for subgraph sampling')
     parser.add_argument('--full_subgraph', type=int, choices=[0, 1], help='Whether to use full subgraph')
     parser.add_argument('--eval_method', type=str, help='Evaluation method')
 
@@ -108,6 +114,10 @@ if __name__ == '__main__':
         parameters['gnn_model'] = args.gnn_model
     if args.graph_type:
         parameters['graph_type'] = args.graph_type
+    if args.dim:
+        parameters['dim'] = args.dim
+    if args.num_neighbors:
+        parameters['num_neighbors'] = args.num_neighbors
     if args.full_subgraph is not None:
         parameters['full_subgraph'] = args.full_subgraph
     if args.eval_method:
