@@ -172,7 +172,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
 
     if test:
         evaluate(model, test_loader, device,
-                 f"../output/NewSplitMethod/{dataset_name}/eval.{gnn_model}.e{epochs}.lr{lr}.d{dim}.nn{num_neighbors}.fs{0 if full_subgraph == '' else 1}.{graph_type}.{eval_method}.csv", graph_type, eval_method)
+                 f"../output/NewSplitMethod/{dataset_name}/eval.{gnn_model}.e{epochs}.lr{lr}.d{dim}.nn{num_neighbors}.fs{0 if full_subgraph == '' else 1}.{graph_type}.{eval_method}.csv", full_subgraph, num_neighbors, graph_type, eval_method)
         # print(f"Test evaluation results:\n{df_mean}")
 
     return model
@@ -320,7 +320,7 @@ def create_runs_for_SE(skills_of_teams, skills_predictions, eval_method):
     return run
 
 
-def evaluate(model, test_loader, device, saving_path, graph_type, eval_method):
+def evaluate(model, test_loader, device, saving_path, full_subgraph, num_neighbors, graph_type, eval_method):
     model.eval()
     all_ground_truth = []
     all_predictions = []
@@ -329,8 +329,8 @@ def evaluate(model, test_loader, device, saving_path, graph_type, eval_method):
     if graph_type == "SE":
 
         # Load data
-        test_STE = torch.load(f'../output/NewSplitMethod/{saving_path.split("/")[3]}/test-STE.pt')
-        test_SE = torch.load(f'../output/NewSplitMethod/{saving_path.split("/")[3]}/test-SE.pt')
+        test_STE = torch.load(f'../output/NewSplitMethod/{saving_path.split("/")[3]}/test.fs{0 if full_subgraph == "" else 1}.STE.nn{num_neighbors}.pt')
+        test_SE = torch.load(f'../output/NewSplitMethod/{saving_path.split("/")[3]}/test.fs{0 if full_subgraph == "" else 1}.SE.nn{num_neighbors}.pt')
 
         # Extract indices
         test_SE_experts = test_SE['expert', 'has', 'skill'].edge_index[0, :]
