@@ -1,0 +1,200 @@
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl not found!
+experts pkl saved!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/imdb/
+preparing data ...
+experts pkl found!
+teams pkl not found!
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=fusion

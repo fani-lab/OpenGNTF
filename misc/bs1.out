@@ -1,0 +1,2705 @@
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -36.4171
+Epoch: 000, Validation Loss: 708.0926
+Validation AUC Epoch 0: 0.4944
+Epoch: 001, Training Loss: -758557.4885
+Epoch: 001, Validation Loss: 1821953.7992
+Validation AUC Epoch 1: 0.4133
+Epoch: 002, Training Loss: -30470047.0994
+Epoch: 002, Validation Loss: 39595888.8826
+Validation AUC Epoch 2: 0.8122
+Epoch: 003, Training Loss: -270346588.3971
+Epoch: 003, Validation Loss: 260783456.0060
+Validation AUC Epoch 3: 0.8074
+Epoch: 004, Training Loss: -1355131021.9586
+Epoch: 004, Validation Loss: 1111079834.8395
+Validation AUC Epoch 4: 0.5548
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 59.9518118789871
+P_2 average: 0.0690283162965574
+P_5 average: 0.055222653037245925
+P_10 average: 0.047879215133356835
+recall_2 average: 0.051012415305682846
+recall_5 average: 0.10408099322445463
+recall_10 average: 0.17844554106450475
+ndcg_cut_2 average: 0.07453750697330366
+ndcg_cut_5 average: 0.08985795547694746
+ndcg_cut_10 average: 0.12256020730560852
+map_cut_2 average: 0.040927427251008494
+map_cut_5 average: 0.05529935116646432
+map_cut_10 average: 0.06558958636784393
+aucroc average: 59.9518118789871
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -47.8319
+Epoch: 000, Validation Loss: 865.6937
+Validation AUC Epoch 0: 0.5134
+Epoch: 001, Training Loss: -1026421.6012
+Epoch: 001, Validation Loss: 2302239.9934
+Validation AUC Epoch 1: 0.7980
+Epoch: 002, Training Loss: -34058162.4759
+Epoch: 002, Validation Loss: 40941527.2670
+Validation AUC Epoch 2: 0.8192
+Epoch: 003, Training Loss: -279638179.1480
+Epoch: 003, Validation Loss: 255857548.9520
+Validation AUC Epoch 3: 0.5038
+Epoch: 004, Training Loss: -1304695299.7829
+Epoch: 004, Validation Loss: 1012029616.6275
+Validation AUC Epoch 4: 0.8216
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 73.08968166718479
+P_2 average: 0.06609094113500176
+P_5 average: 0.045235577487956764
+P_10 average: 0.048466690165667965
+recall_2 average: 0.04729174010104569
+recall_5 average: 0.08271508579932972
+recall_10 average: 0.17798395353911742
+ndcg_cut_2 average: 0.07378735752088927
+ndcg_cut_5 average: 0.07959569849719382
+ndcg_cut_10 average: 0.12120803897751056
+map_cut_2 average: 0.04038890847138996
+map_cut_5 average: 0.05244729975960147
+map_cut_10 average: 0.06587015232077503
+aucroc average: 73.08968166718479
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -31.0188
+Epoch: 000, Validation Loss: 586.8762
+Validation AUC Epoch 0: 0.6330
+Epoch: 001, Training Loss: -684920.6164
+Epoch: 001, Validation Loss: 1499337.3896
+Validation AUC Epoch 1: 0.4440
+Epoch: 002, Training Loss: -25012761.0259
+Epoch: 002, Validation Loss: 30638567.8886
+Validation AUC Epoch 2: 0.5461
+Epoch: 003, Training Loss: -217669722.1732
+Epoch: 003, Validation Loss: 198081156.6273
+Validation AUC Epoch 3: 0.8207
+Epoch: 004, Training Loss: -1036282344.0864
+Epoch: 004, Validation Loss: 771226544.2673
+Validation AUC Epoch 4: 0.7760
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 60.44505027761819
+P_2 average: 0.08224650452355775
+P_5 average: 0.056985078134179294
+P_10 average: 0.05962871577957937
+recall_2 average: 0.06376901600729587
+recall_5 average: 0.10887171223794416
+recall_10 average: 0.22631776244747692
+ndcg_cut_2 average: 0.09747945000070153
+ndcg_cut_5 average: 0.10453663976416042
+ndcg_cut_10 average: 0.15460170118397523
+map_cut_2 average: 0.05686618437764014
+map_cut_5 average: 0.06918136286747495
+map_cut_10 average: 0.08643815053534828
+aucroc average: 60.44505027761819
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -65.1163
+Epoch: 000, Validation Loss: 1224.1584
+Validation AUC Epoch 0: 0.4585
+Epoch: 001, Training Loss: -829150.6025
+Epoch: 001, Validation Loss: 1904086.0903
+Validation AUC Epoch 1: 0.4526
+Epoch: 002, Training Loss: -23744805.1259
+Epoch: 002, Validation Loss: 29886972.9668
+Validation AUC Epoch 2: 0.7347
+Epoch: 003, Training Loss: -186923840.5084
+Epoch: 003, Validation Loss: 175607108.3571
+Validation AUC Epoch 3: 0.7560
+Epoch: 004, Training Loss: -826387956.1435
+Epoch: 004, Validation Loss: 673271853.2167
+Validation AUC Epoch 4: 0.7391
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 66.35750457694078
+P_2 average: 0.030842439196334157
+P_5 average: 0.05581012806955704
+P_10 average: 0.05316649042415698
+recall_2 average: 0.025177501384762577
+recall_5 average: 0.10234887437918809
+recall_10 average: 0.19791147963513137
+ndcg_cut_2 average: 0.03502220685856441
+ndcg_cut_5 average: 0.0774270458189842
+ndcg_cut_10 average: 0.11815127746814816
+map_cut_2 average: 0.021033704281853735
+map_cut_5 average: 0.04303926788799307
+map_cut_10 average: 0.05597508344321292
+aucroc average: 66.35750457694078
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -45.1185
+Epoch: 000, Validation Loss: 818.4599
+Validation AUC Epoch 0: 0.6614
+Epoch: 001, Training Loss: -787225.7448
+Epoch: 001, Validation Loss: 1768465.5478
+Validation AUC Epoch 1: 0.6367
+Epoch: 002, Training Loss: -28142805.6507
+Epoch: 002, Validation Loss: 37398692.1772
+Validation AUC Epoch 2: 0.8166
+Epoch: 003, Training Loss: -311464721.5816
+Epoch: 003, Validation Loss: 304868517.5936
+Validation AUC Epoch 3: 0.8238
+Epoch: 004, Training Loss: -1548771254.2009
+Epoch: 004, Validation Loss: 1302672910.5399
+Validation AUC Epoch 4: 0.7370
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 66.11299250580988
+P_2 average: 0.026436376454000703
+P_5 average: 0.037598402067912116
+P_10 average: 0.04141698977793443
+recall_2 average: 0.021785532448204283
+recall_5 average: 0.07083969764618336
+recall_10 average: 0.1530372459170485
+ndcg_cut_2 average: 0.024442241932226674
+ndcg_cut_5 average: 0.05021979340641167
+ndcg_cut_10 average: 0.085598277551407
+map_cut_2 average: 0.0144420945443152
+map_cut_5 average: 0.026844345226438988
+map_cut_10 average: 0.03727501882095937
+aucroc average: 66.11299250580988
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.4271
+Epoch: 000, Validation Loss: 1.7319
+Validation AUC Epoch 0: 0.6878
+Epoch: 001, Training Loss: -97779.6462
+Epoch: 001, Validation Loss: 305328.7723
+Validation AUC Epoch 1: 0.7153
+Epoch: 002, Training Loss: -8931174.4603
+Epoch: 002, Validation Loss: 13798559.3839
+Validation AUC Epoch 2: 0.7020
+Epoch: 003, Training Loss: -128564718.5645
+Epoch: 003, Validation Loss: 134111067.5347
+Validation AUC Epoch 3: 0.7666
+Epoch: 004, Training Loss: -822902790.6103
+Epoch: 004, Validation Loss: 689325199.8710
+Validation AUC Epoch 4: 0.6971
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 59.943732606040875
+P_2 average: 0.07490306661966865
+P_5 average: 0.08107155445893548
+P_10 average: 0.07314064152273528
+recall_2 average: 0.05517369678455331
+recall_5 average: 0.14936086446484753
+recall_10 average: 0.27233897122864337
+ndcg_cut_2 average: 0.07504233118593044
+ndcg_cut_5 average: 0.11701806793671812
+ndcg_cut_10 average: 0.1690312167930707
+map_cut_2 average: 0.042273724200054826
+map_cut_5 average: 0.06701737993595588
+map_cut_10 average: 0.08344346547480726
+aucroc average: 59.943732606040875
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -88823.3235
+Epoch: 000, Validation Loss: 1228504.4463
+Validation AUC Epoch 0: 0.6939
+Epoch: 001, Training Loss: -833805478.6184
+Epoch: 001, Validation Loss: 1609730700.4972
+Validation AUC Epoch 1: 0.7306
+Epoch: 002, Training Loss: -19873613324.8040
+Epoch: 002, Validation Loss: 22450311260.9073
+Validation AUC Epoch 2: 0.6693
+Epoch: 003, Training Loss: -140853353349.9919
+Epoch: 003, Validation Loss: 128145102123.4747
+Validation AUC Epoch 3: 0.7185
+Epoch: 004, Training Loss: -566906325151.9453
+Epoch: 004, Validation Loss: 448536888814.1508
+Validation AUC Epoch 4: 0.6505
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.02462447672986
+P_2 average: 0.030842439196334157
+P_5 average: 0.045823052520267894
+P_10 average: 0.04435436493949007
+recall_2 average: 0.02111413241127728
+recall_5 average: 0.08284796705663819
+recall_10 average: 0.1636257839994181
+ndcg_cut_2 average: 0.02984537193544714
+ndcg_cut_5 average: 0.05908481618268855
+ndcg_cut_10 average: 0.09324998754545577
+map_cut_2 average: 0.015452691474898028
+map_cut_5 average: 0.030963664203001538
+map_cut_10 average: 0.04247994270098018
+aucroc average: 50.02462447672986
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -131848.0985
+Epoch: 000, Validation Loss: 1978354.7761
+Validation AUC Epoch 0: 0.6893
+Epoch: 001, Training Loss: -802696759.3950
+Epoch: 001, Validation Loss: 1687180315.8500
+Validation AUC Epoch 1: 0.7306
+Epoch: 002, Training Loss: -19635809830.5602
+Epoch: 002, Validation Loss: 22848695555.7299
+Validation AUC Epoch 2: 0.6365
+Epoch: 003, Training Loss: -138396328542.7931
+Epoch: 003, Validation Loss: 128899683733.1012
+Validation AUC Epoch 3: 0.6311
+Epoch: 004, Training Loss: -560132329699.2379
+Epoch: 004, Validation Loss: 464219145495.5787
+Validation AUC Epoch 4: 0.8098
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 67.23324362934065
+P_2 average: 0.06609094113500176
+P_5 average: 0.0569850781341793
+P_10 average: 0.05551639055340148
+recall_2 average: 0.05248110288646066
+recall_5 average: 0.10886238723743129
+recall_10 average: 0.2139551430175328
+ndcg_cut_2 average: 0.06714024244830917
+ndcg_cut_5 average: 0.09064576992264851
+ndcg_cut_10 average: 0.13367061919933929
+map_cut_2 average: 0.04036443034504367
+map_cut_5 average: 0.05597331557853235
+map_cut_10 average: 0.06899276473210206
+aucroc average: 67.23324362934065
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -108586.9858
+Epoch: 000, Validation Loss: 1487373.9784
+Validation AUC Epoch 0: 0.7452
+Epoch: 001, Training Loss: -760457829.4625
+Epoch: 001, Validation Loss: 1668432184.5782
+Validation AUC Epoch 1: 0.7384
+Epoch: 002, Training Loss: -18041792878.6038
+Epoch: 002, Validation Loss: 22250055453.5235
+Validation AUC Epoch 2: 0.8071
+Epoch: 003, Training Loss: -130252050856.5433
+Epoch: 003, Validation Loss: 123495961983.5779
+Validation AUC Epoch 3: 0.8047
+Epoch: 004, Training Loss: -535981942957.3762
+Epoch: 004, Validation Loss: 442888125968.1672
+Validation AUC Epoch 4: 0.6377
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 59.63812725501322
+P_2 average: 0.049935377746445776
+P_5 average: 0.04934790271413466
+P_10 average: 0.06403477852191283
+recall_2 average: 0.04033995221869737
+recall_5 average: 0.09331061763208397
+recall_10 average: 0.23645870050522855
+ndcg_cut_2 average: 0.05203398037306059
+ndcg_cut_5 average: 0.0743127489133673
+ndcg_cut_10 average: 0.13537069026036613
+map_cut_2 average: 0.029569576626326713
+map_cut_5 average: 0.043321388007676334
+map_cut_10 average: 0.06283016329940899
+aucroc average: 59.63812725501322
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -214815.5624
+Epoch: 000, Validation Loss: 2403302.7078
+Validation AUC Epoch 0: 0.7633
+Epoch: 001, Training Loss: -984464502.6290
+Epoch: 001, Validation Loss: 1798277990.0170
+Validation AUC Epoch 1: 0.5490
+Epoch: 002, Training Loss: -21963658173.3708
+Epoch: 002, Validation Loss: 22083977659.2636
+Validation AUC Epoch 2: 0.6402
+Epoch: 003, Training Loss: -142104715083.7635
+Epoch: 003, Validation Loss: 114964498016.9050
+Validation AUC Epoch 3: 0.6337
+Epoch: 004, Training Loss: -558876183788.3340
+Epoch: 004, Validation Loss: 413585094435.3152
+Validation AUC Epoch 4: 0.6256
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 59.867777266254826
+P_2 average: 0.04552931500411232
+P_5 average: 0.05581012806955705
+P_10 average: 0.06844084126424628
+recall_2 average: 0.03377981435788979
+recall_5 average: 0.10927035600986958
+recall_10 average: 0.26547937369227464
+ndcg_cut_2 average: 0.04719109377225736
+ndcg_cut_5 average: 0.07792221407090144
+ndcg_cut_10 average: 0.1425385924889776
+map_cut_2 average: 0.0264363764540007
+map_cut_5 average: 0.0428318254807504
+map_cut_10 average: 0.06241969255397954
+aucroc average: 59.867777266254826
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -171995.8877
+Epoch: 000, Validation Loss: 1819621.3841
+Validation AUC Epoch 0: 0.7654
+Epoch: 001, Training Loss: -772468800.4216
+Epoch: 001, Validation Loss: 1464765669.1158
+Validation AUC Epoch 1: 0.7509
+Epoch: 002, Training Loss: -18183637319.7105
+Epoch: 002, Validation Loss: 20843718260.9677
+Validation AUC Epoch 2: 0.6634
+Epoch: 003, Training Loss: -130974367291.4605
+Epoch: 003, Validation Loss: 116156900189.5463
+Validation AUC Epoch 3: 0.6323
+Epoch: 004, Training Loss: -544873067034.7982
+Epoch: 004, Validation Loss: 427601029701.6614
+Validation AUC Epoch 4: 0.6665
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 59.62699270901363
+P_2 average: 0.041123252261778875
+P_5 average: 0.04758547761720127
+P_10 average: 0.050816590294912464
+recall_2 average: 0.030352876669408214
+recall_5 average: 0.09007950495437278
+recall_10 average: 0.19181059804958284
+ndcg_cut_2 average: 0.041123252261778875
+ndcg_cut_5 average: 0.06828474024806412
+ndcg_cut_10 average: 0.11202479143675653
+map_cut_2 average: 0.022519876238593195
+map_cut_5 average: 0.03805940678076737
+map_cut_10 average: 0.0516801241965735
+aucroc average: 59.62699270901363
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -390191.8993
+Epoch: 000, Validation Loss: 3812083.9688
+Validation AUC Epoch 0: 0.7067
+Epoch: 001, Training Loss: -1137805786.3981
+Epoch: 001, Validation Loss: 1887149788.0015
+Validation AUC Epoch 1: 0.5750
+Epoch: 002, Training Loss: -21639267240.9806
+Epoch: 002, Validation Loss: 23139696382.6454
+Validation AUC Epoch 2: 0.6409
+Epoch: 003, Training Loss: -152216977883.4635
+Epoch: 003, Validation Loss: 127959291762.4503
+Validation AUC Epoch 3: 0.6482
+Epoch: 004, Training Loss: -616715659096.3265
+Epoch: 004, Validation Loss: 458634315079.4781
+Validation AUC Epoch 4: 0.5655
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.01113454599959
+P_2 average: 0.04406062742333451
+P_5 average: 0.037010927035600986
+P_10 average: 0.044648102455645634
+recall_2 average: 0.039116045901382526
+recall_5 average: 0.0733154852823517
+recall_10 average: 0.17223509072292997
+ndcg_cut_2 average: 0.04372667910102049
+ndcg_cut_5 average: 0.05799797639730441
+ndcg_cut_10 average: 0.10023838047162603
+map_cut_2 average: 0.028370148435358164
+map_cut_5 average: 0.038086216157241885
+map_cut_10 average: 0.05195977707653774
+aucroc average: 50.01113454599959
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -9066232.4547
+Epoch: 000, Validation Loss: 81897112.2481
+Validation AUC Epoch 0: 0.7031
+Epoch: 001, Training Loss: -22237894296.7704
+Epoch: 001, Validation Loss: 41389767130.4119
+Validation AUC Epoch 1: 0.6601
+Epoch: 002, Training Loss: -532396623406.5452
+Epoch: 002, Validation Loss: 582203500682.8400
+Validation AUC Epoch 2: 0.5522
+Epoch: 003, Training Loss: -3814854796049.0049
+Epoch: 003, Validation Loss: 3195036810628.0933
+Validation AUC Epoch 3: 0.7691
+Epoch: 004, Training Loss: -15998147009337.3867
+Epoch: 004, Validation Loss: 11775105146041.0176
+Validation AUC Epoch 4: 0.6597
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 59.89330536187468
+P_2 average: 0.041123252261778875
+P_5 average: 0.05757255316649042
+P_10 average: 0.06285982845729056
+recall_2 average: 0.02814984529824149
+recall_5 average: 0.10295499941252496
+recall_10 average: 0.2332602253293124
+ndcg_cut_2 average: 0.03827131504537963
+ndcg_cut_5 average: 0.07409185468227648
+ndcg_cut_10 average: 0.12913346359247552
+map_cut_2 average: 0.019092938550111616
+map_cut_5 average: 0.03891940495306726
+map_cut_10 average: 0.05630441137799262
+aucroc average: 59.89330536187468
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -12876921.5262
+Epoch: 000, Validation Loss: 123277741.4880
+Validation AUC Epoch 0: 0.7248
+Epoch: 001, Training Loss: -30495075604.6475
+Epoch: 001, Validation Loss: 59276675154.5404
+Validation AUC Epoch 1: 0.6840
+Epoch: 002, Training Loss: -655327475717.7283
+Epoch: 002, Validation Loss: 753993891695.8318
+Validation AUC Epoch 2: 0.6352
+Epoch: 003, Training Loss: -4696777161922.3838
+Epoch: 003, Validation Loss: 4250618357392.4277
+Validation AUC Epoch 3: 0.6308
+Epoch: 004, Training Loss: -19603513084025.7227
+Epoch: 004, Validation Loss: 15186430371674.6504
+Validation AUC Epoch 4: 0.6253
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 59.46661242144257
+P_2 average: 0.03818587710022324
+P_5 average: 0.03759840206791211
+P_10 average: 0.04406062742333451
+recall_2 average: 0.030108095405945248
+recall_5 average: 0.0797287543850815
+recall_10 average: 0.17276195325190744
+ndcg_cut_2 average: 0.0355270310711912
+ndcg_cut_5 average: 0.05739006788041256
+ndcg_cut_10 average: 0.09880098471234858
+map_cut_2 average: 0.020684016762620924
+map_cut_5 average: 0.03327626433019454
+map_cut_10 average: 0.046548362716409955
+aucroc average: 59.46661242144257
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -13677812.2198
+Epoch: 000, Validation Loss: 107044551.3588
+Validation AUC Epoch 0: 0.7830
+Epoch: 001, Training Loss: -32523280887.0169
+Epoch: 001, Validation Loss: 51530245636.6747
+Validation AUC Epoch 1: 0.6872
+Epoch: 002, Training Loss: -720392246071.3497
+Epoch: 002, Validation Loss: 660689748219.9515
+Validation AUC Epoch 2: 0.7507
+Epoch: 003, Training Loss: -4955138458582.3887
+Epoch: 003, Validation Loss: 3588322125310.6084
+Validation AUC Epoch 3: 0.6464
+Epoch: 004, Training Loss: -19942042756324.4727
+Epoch: 004, Validation Loss: 13329358256589.5391
+Validation AUC Epoch 4: 0.6470
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 60.01755832253782
+P_2 average: 0.02349900129244507
+P_5 average: 0.0393608271648455
+P_10 average: 0.052872752908001405
+recall_2 average: 0.0200720636039635
+recall_5 average: 0.06995848509771668
+recall_10 average: 0.19424209193331507
+ndcg_cut_2 average: 0.02687479288115551
+ndcg_cut_5 average: 0.05516084599084982
+ndcg_cut_10 average: 0.1078640781915373
+map_cut_2 average: 0.016889907178944893
+map_cut_5 average: 0.031128017337040948
+map_cut_10 average: 0.04777955419037548
+aucroc average: 60.01755832253782
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -7537794.6954
+Epoch: 000, Validation Loss: 78989762.7485
+Validation AUC Epoch 0: 0.7735
+Epoch: 001, Training Loss: -23698895906.8015
+Epoch: 001, Validation Loss: 46463056930.3204
+Validation AUC Epoch 1: 0.7354
+Epoch: 002, Training Loss: -549941561134.1757
+Epoch: 002, Validation Loss: 651089872449.8696
+Validation AUC Epoch 2: 0.7856
+Epoch: 003, Training Loss: -3724229662860.5366
+Epoch: 003, Validation Loss: 3483782203427.5239
+Validation AUC Epoch 3: 0.6474
+Epoch: 004, Training Loss: -15740078677284.8105
+Epoch: 004, Validation Loss: 13278228597181.4824
+Validation AUC Epoch 4: 0.8132
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 67.84150402021348
+P_2 average: 0.057278815650334866
+P_5 average: 0.05874750323111269
+P_10 average: 0.07431559158735754
+recall_2 average: 0.04503975247718639
+recall_5 average: 0.11357850624681784
+recall_10 average: 0.283897309364352
+ndcg_cut_2 average: 0.05722498902922945
+ndcg_cut_5 average: 0.08659953767907436
+ndcg_cut_10 average: 0.15950619509438257
+map_cut_2 average: 0.03243351740884346
+map_cut_5 average: 0.05278299977806499
+map_cut_10 average: 0.075759121093835
+aucroc average: 67.84150402021348
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -11039404.2367
+Epoch: 000, Validation Loss: 86972161.6513
+Validation AUC Epoch 0: 0.7075
+Epoch: 001, Training Loss: -26066479269.2041
+Epoch: 001, Validation Loss: 42729208980.3794
+Validation AUC Epoch 1: 0.6592
+Epoch: 002, Training Loss: -569162011138.3571
+Epoch: 002, Validation Loss: 568200156142.2399
+Validation AUC Epoch 2: 0.6432
+Epoch: 003, Training Loss: -3803085660368.6216
+Epoch: 003, Validation Loss: 2948541053197.7432
+Validation AUC Epoch 3: 0.6418
+Epoch: 004, Training Loss: -15950846815504.9160
+Epoch: 004, Validation Loss: 11243218941633.3301
+Validation AUC Epoch 4: 0.6333
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 59.582026273246036
+P_2 average: 0.049935377746445776
+P_5 average: 0.06168487839266831
+P_10 average: 0.06315356597344612
+recall_2 average: 0.04427043993487419
+recall_5 average: 0.11764770334562367
+recall_10 average: 0.23928767253582192
+ndcg_cut_2 average: 0.05558383298945384
+ndcg_cut_5 average: 0.09296842699988443
+ndcg_cut_10 average: 0.14374327411906207
+map_cut_2 average: 0.03558070508193878
+map_cut_5 average: 0.0548142568689508
+map_cut_10 average: 0.07076095319740798
+aucroc average: 59.582026273246036
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: -10449671.0742
+Epoch: 000, Validation Loss: 111990068.9870
+Validation AUC Epoch 0: 0.7096
+Epoch: 001, Training Loss: -26186528651.2646
+Epoch: 001, Validation Loss: 55521756559.6552
+Validation AUC Epoch 1: 0.6506
+Epoch: 002, Training Loss: -568866081642.6586
+Epoch: 002, Validation Loss: 712934980571.8054
+Validation AUC Epoch 2: 0.6469
+Epoch: 003, Training Loss: -4046092214961.5786
+Epoch: 003, Validation Loss: 3850522655754.1367
+Validation AUC Epoch 3: 0.5750
+Epoch: 004, Training Loss: -16949579526894.0352
+Epoch: 004, Validation Loss: 14025113660569.2793
+Validation AUC Epoch 4: 0.6270
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 59.46307934434654
+P_2 average: 0.03818587710022324
+P_5 average: 0.04406062742333451
+P_10 average: 0.05346022794031254
+recall_2 average: 0.02702385148631183
+recall_5 average: 0.08113682946252562
+recall_10 average: 0.19765271087089906
+ndcg_cut_2 average: 0.03752116559296523
+ndcg_cut_5 average: 0.060250275336405895
+ndcg_cut_10 average: 0.10986367258891244
+map_cut_2 average: 0.02012101985665609
+map_cut_5 average: 0.032755812739069703
+map_cut_10 average: 0.04785172580892825
+aucroc average: 59.46307934434654
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gs, graph_type=SE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5013
+Epoch: 000, Validation Loss: 0.4322
+Validation AUC Epoch 0: 0.7047
+Epoch: 001, Training Loss: 0.4850
+Epoch: 001, Validation Loss: 0.4159
+Validation AUC Epoch 1: 0.7525
+Epoch: 002, Training Loss: 0.4777
+Epoch: 002, Validation Loss: 0.3944
+Validation AUC Epoch 2: 0.7910
+Epoch: 003, Training Loss: 0.4673
+Epoch: 003, Validation Loss: 0.3756
+Validation AUC Epoch 3: 0.8098
+Epoch: 004, Training Loss: 0.4494
+Epoch: 004, Validation Loss: 0.4080
+Validation AUC Epoch 4: 0.7940
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 79.47261504419414
+P_2 average: 24.15975556525535
+P_5 average: 14.683544303797467
+P_10 average: 8.89131383675251
+recall_2 average: 34.34017168630874
+recall_5 average: 50.8322421067947
+recall_10 average: 60.43067074057908
+ndcg_cut_2 average: 34.167500700670914
+ndcg_cut_5 average: 41.409073404674764
+ndcg_cut_10 average: 44.941974039869095
+map_cut_2 average: 30.619089189582425
+map_cut_5 average: 36.62292060720695
+map_cut_10 average: 38.60611225430081
+aucroc average: 79.47261504419414
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STE.sum.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5014
+Epoch: 000, Validation Loss: 0.4346
+Validation AUC Epoch 0: 0.6926
+Epoch: 001, Training Loss: 0.4851
+Epoch: 001, Validation Loss: 0.4192
+Validation AUC Epoch 1: 0.7476
+Epoch: 002, Training Loss: 0.4774
+Epoch: 002, Validation Loss: 0.3948
+Validation AUC Epoch 2: 0.7954
+Epoch: 003, Training Loss: 0.4668
+Epoch: 003, Validation Loss: 0.3753
+Validation AUC Epoch 3: 0.8113
+Epoch: 004, Training Loss: 0.4494
+Epoch: 004, Validation Loss: 0.4015
+Validation AUC Epoch 4: 0.8158
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 81.20255295582392
+P_2 average: 23.26906222611744
+P_5 average: 13.356704645048206
+P_10 average: 7.892199824715163
+recall_2 average: 34.669149868536365
+recall_5 average: 47.58691206543968
+recall_10 average: 55.35933391761611
+ndcg_cut_2 average: 33.94117765281614
+ndcg_cut_5 average: 39.67840154431775
+ndcg_cut_10 average: 42.517613520267595
+map_cut_2 average: 30.73802220274613
+map_cut_5 average: 35.670525367611255
+map_cut_10 average: 37.22909681936851
+aucroc average: 81.20255295582392
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STE.fusion.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5011
+Epoch: 000, Validation Loss: 0.4349
+Validation AUC Epoch 0: 0.7037
+Epoch: 001, Training Loss: 0.4852
+Epoch: 001, Validation Loss: 0.4156
+Validation AUC Epoch 1: 0.7545
+Epoch: 002, Training Loss: 0.4778
+Epoch: 002, Validation Loss: 0.3954
+Validation AUC Epoch 2: 0.8018
+Epoch: 003, Training Loss: 0.4675
+Epoch: 003, Validation Loss: 0.3782
+Validation AUC Epoch 3: 0.8155
+Epoch: 004, Training Loss: 0.4533
+Epoch: 004, Validation Loss: 0.3797
+Validation AUC Epoch 4: 0.8097
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 81.41711626871518
+P_2 average: 24.157549234135665
+P_5 average: 14.153172866520785
+P_10 average: 8.37199124726477
+recall_2 average: 34.412107950401165
+recall_5 average: 48.93216630196936
+recall_10 average: 57.5018234865062
+ndcg_cut_2 average: 34.09489658877736
+ndcg_cut_5 average: 40.39524958568253
+ndcg_cut_10 average: 43.506425679238326
+map_cut_2 average: 30.522611232676876
+map_cut_5 average: 36.052358375881354
+map_cut_10 average: 37.7788382943744
+aucroc average: 81.41711626871518
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STE.sum.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5016
+Epoch: 000, Validation Loss: 0.4323
+Validation AUC Epoch 0: 0.7047
+Epoch: 001, Training Loss: 0.4853
+Epoch: 001, Validation Loss: 0.4142
+Validation AUC Epoch 1: 0.7513
+Epoch: 002, Training Loss: 0.4776
+Epoch: 002, Validation Loss: 0.3956
+Validation AUC Epoch 2: 0.7964
+Epoch: 003, Training Loss: 0.4669
+Epoch: 003, Validation Loss: 0.3801
+Validation AUC Epoch 3: 0.8087
+Epoch: 004, Training Loss: -3.3299
+Epoch: 004, Validation Loss: 43.1587
+Validation AUC Epoch 4: 0.6724
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 67.06523333041645
+P_2 average: 25.338871884564934
+P_5 average: 17.743769129864447
+P_10 average: 12.960209881941406
+recall_2 average: 28.969537968226206
+recall_5 average: 49.83019967934703
+recall_10 average: 70.08089199825098
+ndcg_cut_2 average: 31.33042318670472
+ndcg_cut_5 average: 39.58825192233652
+ndcg_cut_10 average: 47.4857673144815
+map_cut_2 average: 24.762425302434043
+map_cut_5 average: 32.37974299178934
+map_cut_10 average: 37.00411082423544
+aucroc average: 67.06523333041645
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STE.fusion.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5014
+Epoch: 000, Validation Loss: 0.4348
+Validation AUC Epoch 0: 0.6958
+Epoch: 001, Training Loss: 0.4848
+Epoch: 001, Validation Loss: 0.4147
+Validation AUC Epoch 1: 0.7490
+Epoch: 002, Training Loss: 0.4769
+Epoch: 002, Validation Loss: 0.3904
+Validation AUC Epoch 2: 0.7995
+Epoch: 003, Training Loss: 0.4660
+Epoch: 003, Validation Loss: 0.3756
+Validation AUC Epoch 3: 0.8090
+Epoch: 004, Training Loss: -6.5702
+Epoch: 004, Validation Loss: 36.6485
+Validation AUC Epoch 4: 0.6306
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 63.153336529325465
+P_2 average: 20.92616863259065
+P_5 average: 15.98951507208388
+P_10 average: 13.09742245522062
+recall_2 average: 23.726518130187856
+recall_5 average: 44.07310324741517
+recall_10 average: 68.81753312945973
+ndcg_cut_2 average: 25.62055760980982
+ndcg_cut_5 average: 34.01113375869972
+ndcg_cut_10 average: 43.71804482674321
+map_cut_2 average: 19.76918596184651
+map_cut_5 average: 26.967125382262996
+map_cut_10 average: 32.52415364718772
+aucroc average: 63.153336529325465
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STE.sum.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5014
+Epoch: 000, Validation Loss: 0.4329
+Validation AUC Epoch 0: 0.7010
+Epoch: 001, Training Loss: 0.4854
+Epoch: 001, Validation Loss: 0.4189
+Validation AUC Epoch 1: 0.7440
+Epoch: 002, Training Loss: 0.4779
+Epoch: 002, Validation Loss: 0.3946
+Validation AUC Epoch 2: 0.7917
+Epoch: 003, Training Loss: 0.4672
+Epoch: 003, Validation Loss: 0.3789
+Validation AUC Epoch 3: 0.8081
+Epoch: 004, Training Loss: 0.4531
+Epoch: 004, Validation Loss: 0.3753
+Validation AUC Epoch 4: 0.8150
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 81.51148470835197
+P_2 average: 24.649737302977233
+P_5 average: 14.264448336252187
+P_10 average: 8.502626970227672
+recall_2 average: 36.14054290718039
+recall_5 average: 50.38966725043782
+recall_10 average: 59.46657910099241
+ndcg_cut_2 average: 35.60860966253095
+ndcg_cut_5 average: 41.876935138757695
+ndcg_cut_10 average: 45.142782658649715
+map_cut_2 average: 32.076036193812016
+map_cut_5 average: 37.53035610040864
+map_cut_10 average: 39.31558825369027
+aucroc average: 81.51148470835197
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STE.fusion.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5095
+Epoch: 000, Validation Loss: 0.4221
+Validation AUC Epoch 0: 0.7288
+Epoch: 001, Training Loss: 0.4799
+Epoch: 001, Validation Loss: 0.3903
+Validation AUC Epoch 1: 0.7938
+Epoch: 002, Training Loss: 0.4433
+Epoch: 002, Validation Loss: 0.6705
+Validation AUC Epoch 2: 0.7377
+Epoch: 003, Training Loss: -2315662.3199
+Epoch: 003, Validation Loss: 480378.2241
+Validation AUC Epoch 3: 0.5012
+Epoch: 004, Training Loss: -101689098.8994
+Epoch: 004, Validation Loss: 10282780.4305
+Validation AUC Epoch 4: 0.4967
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.011227165202
+P_2 average: 12.598253275109169
+P_5 average: 8.820960698689955
+P_10 average: 5.5152838427947595
+recall_2 average: 19.47234352256186
+recall_5 average: 33.49344978165939
+recall_10 average: 41.56477438136827
+ndcg_cut_2 average: 17.975356702137024
+ndcg_cut_5 average: 24.432038963753214
+ndcg_cut_10 average: 27.236550193965993
+map_cut_2 average: 15.829694323144105
+map_cut_5 average: 20.34849587578845
+map_cut_10 average: 21.70582645964742
+aucroc average: 49.011227165202
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STE.sum.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5095
+Epoch: 000, Validation Loss: 0.4195
+Validation AUC Epoch 0: 0.7252
+Epoch: 001, Training Loss: 0.4801
+Epoch: 001, Validation Loss: 0.3915
+Validation AUC Epoch 1: 0.7816
+Epoch: 002, Training Loss: 0.4341
+Epoch: 002, Validation Loss: 1.1582
+Validation AUC Epoch 2: 0.7035
+Epoch: 003, Training Loss: -1499894.5898
+Epoch: 003, Validation Loss: 1004639.7043
+Validation AUC Epoch 3: 0.5185
+Epoch: 004, Training Loss: -50435662.1076
+Epoch: 004, Validation Loss: 19350765.8411
+Validation AUC Epoch 4: 0.5066
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.43985200474725
+P_2 average: 13.20754716981132
+P_5 average: 9.433962264150944
+P_10 average: 5.691092584466871
+recall_2 average: 19.68334064648237
+recall_5 average: 35.40661108673395
+recall_10 average: 42.74535615035834
+ndcg_cut_2 average: 17.934906002158595
+ndcg_cut_5 average: 25.082804500409168
+ndcg_cut_10 average: 27.647189915169346
+map_cut_2 average: 15.419774755009504
+map_cut_5 average: 20.49516113305056
+map_cut_10 average: 21.728140649268337
+aucroc average: 49.43985200474725
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STE.fusion.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5099
+Epoch: 000, Validation Loss: 0.4214
+Validation AUC Epoch 0: 0.7264
+Epoch: 001, Training Loss: 0.4802
+Epoch: 001, Validation Loss: 0.3903
+Validation AUC Epoch 1: 0.7891
+Epoch: 002, Training Loss: -640.4835
+Epoch: 002, Validation Loss: 2090.4559
+Validation AUC Epoch 2: 0.5477
+Epoch: 003, Training Loss: -6219075.9762
+Epoch: 003, Validation Loss: 3276036.3424
+Validation AUC Epoch 3: 0.5113
+Epoch: 004, Training Loss: -135591133.4476
+Epoch: 004, Validation Loss: 44640479.5291
+Validation AUC Epoch 4: 0.5073
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 48.814230007190446
+P_2 average: 13.215377894276978
+P_5 average: 9.611183923110529
+P_10 average: 5.8671909130624735
+recall_2 average: 20.627639434978885
+recall_5 average: 36.83923110528615
+recall_10 average: 45.15436143876511
+ndcg_cut_2 average: 18.62988199267249
+ndcg_cut_5 average: 26.197364527338816
+ndcg_cut_10 average: 29.00872921519656
+map_cut_2 average: 16.375418668996648
+map_cut_5 average: 21.63347653026552
+map_cut_10 average: 22.945840585639626
+aucroc average: 48.814230007190446
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STE.sum.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5096
+Epoch: 000, Validation Loss: 0.4200
+Validation AUC Epoch 0: 0.7276
+Epoch: 001, Training Loss: 0.4796
+Epoch: 001, Validation Loss: 0.3897
+Validation AUC Epoch 1: 0.7841
+Epoch: 002, Training Loss: 0.3134
+Epoch: 002, Validation Loss: 2.6245
+Validation AUC Epoch 2: 0.6344
+Epoch: 003, Training Loss: -1785135.2531
+Epoch: 003, Validation Loss: 1617957.6409
+Validation AUC Epoch 3: 0.5078
+Epoch: 004, Training Loss: -59631465.2030
+Epoch: 004, Validation Loss: 28849899.8889
+Validation AUC Epoch 4: 0.5132
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.90868395540253
+P_2 average: 12.401746724890831
+P_5 average: 9.117903930131005
+P_10 average: 5.751091703056768
+recall_2 average: 18.61353711790393
+recall_5 average: 33.96288209606987
+recall_10 average: 42.79112081513828
+ndcg_cut_2 average: 17.25299554280041
+ndcg_cut_5 average: 24.3753500540565
+ndcg_cut_10 average: 27.46680484021018
+map_cut_2 average: 15.129184861717611
+map_cut_5 average: 20.084121785540997
+map_cut_10 average: 21.60443959243086
+aucroc average: 49.90868395540253
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STE.fusion.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5096
+Epoch: 000, Validation Loss: 0.4209
+Validation AUC Epoch 0: 0.7177
+Epoch: 001, Training Loss: 0.4802
+Epoch: 001, Validation Loss: 0.3938
+Validation AUC Epoch 1: 0.7791
+Epoch: 002, Training Loss: -1.0235
+Epoch: 002, Validation Loss: 7.0017
+Validation AUC Epoch 2: 0.5657
+Epoch: 003, Training Loss: -1239189.4704
+Epoch: 003, Validation Loss: 120817.6085
+Validation AUC Epoch 3: 0.5059
+Epoch: 004, Training Loss: -35648074.4944
+Epoch: 004, Validation Loss: 3028597.8938
+Validation AUC Epoch 4: 0.5086
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.83439687390423
+P_2 average: 11.929824561403509
+P_5 average: 8.982456140350878
+P_10 average: 5.802631578947369
+recall_2 average: 17.989766081871345
+recall_5 average: 33.969298245614034
+recall_10 average: 43.848684210526315
+ndcg_cut_2 average: 16.342817219133728
+ndcg_cut_5 average: 23.747806185928997
+ndcg_cut_10 average: 27.112501152417558
+map_cut_2 average: 14.263523391812866
+map_cut_5 average: 19.290265594541907
+map_cut_10 average: 20.863043024227235
+aucroc average: 49.83439687390423
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STE.sum.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5097
+Epoch: 000, Validation Loss: 0.4205
+Validation AUC Epoch 0: 0.7228
+Epoch: 001, Training Loss: 0.4800
+Epoch: 001, Validation Loss: 0.3874
+Validation AUC Epoch 1: 0.7876
+Epoch: 002, Training Loss: 0.4450
+Epoch: 002, Validation Loss: 0.7814
+Validation AUC Epoch 2: 0.7515
+Epoch: 003, Training Loss: -1920627.9543
+Epoch: 003, Validation Loss: 1153919.7774
+Validation AUC Epoch 3: 0.5044
+Epoch: 004, Training Loss: -71964688.3079
+Epoch: 004, Validation Loss: 21443714.1366
+Validation AUC Epoch 4: 0.5090
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.45411739459919
+P_2 average: 11.283282409428196
+P_5 average: 8.511567001309473
+P_10 average: 5.456132693147097
+recall_2 average: 17.1686308744362
+recall_5 average: 31.97657500363742
+recall_10 average: 41.33566128328241
+ndcg_cut_2 average: 15.710764228814595
+ndcg_cut_5 average: 22.62156835262346
+ndcg_cut_10 average: 25.820786723631066
+map_cut_2 average: 13.696711770696929
+map_cut_5 average: 18.52066055579805
+map_cut_10 average: 20.037269139189696
+aucroc average: 49.45411739459919
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STE.fusion.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5360
+Epoch: 000, Validation Loss: 0.3985
+Validation AUC Epoch 0: 0.7503
+Epoch: 001, Training Loss: -212274.9889
+Epoch: 001, Validation Loss: 347561.9539
+Validation AUC Epoch 1: 0.4838
+Epoch: 002, Training Loss: -343387189.5605
+Epoch: 002, Validation Loss: 133102759.1086
+Validation AUC Epoch 2: 0.5073
+Epoch: 003, Training Loss: -5228357683.2626
+Epoch: 003, Validation Loss: 1264323224.8541
+Validation AUC Epoch 3: 0.5085
+Epoch: 004, Training Loss: -26837833952.1568
+Epoch: 004, Validation Loss: 5464294354.3702
+Validation AUC Epoch 4: 0.4993
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 48.96085698788646
+P_2 average: 11.849584608657631
+P_5 average: 7.844337560122431
+P_10 average: 4.984696108439003
+recall_2 average: 18.054948258271388
+recall_5 average: 29.83530097653403
+recall_10 average: 38.168634309867365
+ndcg_cut_2 average: 16.414385037691197
+ndcg_cut_5 average: 21.77640958653259
+ndcg_cut_10 average: 24.60910561743609
+map_cut_2 average: 14.360151581402125
+map_cut_5 average: 18.112884419180876
+map_cut_10 average: 19.417266445032073
+aucroc average: 48.96085698788646
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STE.sum.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5353
+Epoch: 000, Validation Loss: 0.3918
+Validation AUC Epoch 0: 0.7633
+Epoch: 001, Training Loss: -44904.4132
+Epoch: 001, Validation Loss: 46027.3280
+Validation AUC Epoch 1: 0.4985
+Epoch: 002, Training Loss: -281108193.1028
+Epoch: 002, Validation Loss: 55429198.4796
+Validation AUC Epoch 2: 0.4938
+Epoch: 003, Training Loss: -7342537567.3334
+Epoch: 003, Validation Loss: 1067455204.9729
+Validation AUC Epoch 3: 0.4902
+Epoch: 004, Training Loss: -48562842344.5600
+Epoch: 004, Validation Loss: 5875091237.0894
+Validation AUC Epoch 4: 0.4933
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 48.49349123124209
+P_2 average: 13.004385964912279
+P_5 average: 9.37719298245614
+P_10 average: 6.048245614035086
+recall_2 average: 19.612573099415204
+recall_5 average: 35.15716374269006
+recall_10 average: 45.438596491228076
+ndcg_cut_2 average: 17.89177972514224
+ndcg_cut_5 average: 25.103004046309625
+ndcg_cut_10 average: 28.69009962234416
+map_cut_2 average: 15.595760233918126
+map_cut_5 average: 20.676535087719298
+map_cut_10 average: 22.40512160029704
+aucroc average: 48.49349123124209
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STE.fusion.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5355
+Epoch: 000, Validation Loss: 0.3978
+Validation AUC Epoch 0: 0.7487
+Epoch: 001, Training Loss: -428777.1918
+Epoch: 001, Validation Loss: 241639.7993
+Validation AUC Epoch 1: 0.5119
+Epoch: 002, Training Loss: -503974757.4068
+Epoch: 002, Validation Loss: 122824670.0010
+Validation AUC Epoch 2: 0.5011
+Epoch: 003, Training Loss: -8773148972.1438
+Epoch: 003, Validation Loss: 1536663193.2362
+Validation AUC Epoch 3: 0.5033
+Epoch: 004, Training Loss: -48914091929.8741
+Epoch: 004, Validation Loss: 7039458762.9801
+Validation AUC Epoch 4: 0.4984
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 48.969444946664254
+P_2 average: 12.516354121238551
+P_5 average: 9.620584387265591
+P_10 average: 6.218927169646751
+recall_2 average: 18.830498618985317
+recall_5 average: 35.82424771042303
+recall_10 average: 46.4573339148132
+ndcg_cut_2 average: 17.133029356382593
+ndcg_cut_5 average: 25.054315392230393
+ndcg_cut_10 average: 28.735871488959376
+map_cut_2 average: 14.882977176915249
+map_cut_5 average: 20.331746377865
+map_cut_10 average: 22.09131483673568
+aucroc average: 48.969444946664254
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STE.sum.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5363
+Epoch: 000, Validation Loss: 0.3952
+Validation AUC Epoch 0: 0.7596
+Epoch: 001, Training Loss: -159653.0157
+Epoch: 001, Validation Loss: 72394.1193
+Validation AUC Epoch 1: 0.5063
+Epoch: 002, Training Loss: -260996507.9690
+Epoch: 002, Validation Loss: 35369920.2659
+Validation AUC Epoch 2: 0.5078
+Epoch: 003, Training Loss: -4273623301.7956
+Epoch: 003, Validation Loss: 353177562.8856
+Validation AUC Epoch 3: 0.4823
+Epoch: 004, Training Loss: -24819145699.3924
+Epoch: 004, Validation Loss: 2003262758.2542
+Validation AUC Epoch 4: 0.4896
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 48.16036883022962
+P_2 average: 11.276223776223777
+P_5 average: 8.26048951048951
+P_10 average: 5.301573426573427
+recall_2 average: 18.69900932400932
+recall_5 average: 33.11480186480186
+recall_10 average: 42.38417832167832
+ndcg_cut_2 average: 16.286198107593645
+ndcg_cut_5 average: 23.080865278401287
+ndcg_cut_10 average: 26.257029728961246
+map_cut_2 average: 14.499562937062937
+map_cut_5 average: 18.97338772338772
+map_cut_10 average: 20.440505674880676
+aucroc average: 48.16036883022962
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STE.fusion.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5358
+Epoch: 000, Validation Loss: 0.3977
+Validation AUC Epoch 0: 0.7472
+Epoch: 001, Training Loss: -189707.8019
+Epoch: 001, Validation Loss: 89297.3535
+Validation AUC Epoch 1: 0.5463
+Epoch: 002, Training Loss: -240181372.7853
+Epoch: 002, Validation Loss: 58335577.4237
+Validation AUC Epoch 2: 0.5114
+Epoch: 003, Training Loss: -4373481910.2211
+Epoch: 003, Validation Loss: 605973677.0524
+Validation AUC Epoch 3: 0.5001
+Epoch: 004, Training Loss: -26552680892.0456
+Epoch: 004, Validation Loss: 3403084432.0940
+Validation AUC Epoch 4: 0.4983
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.053968540951
+P_2 average: 13.425317564607973
+P_5 average: 9.636443276390715
+P_10 average: 6.21550591327201
+recall_2 average: 19.981019126879833
+recall_5 average: 35.687691633815156
+recall_10 average: 45.243831216235954
+ndcg_cut_2 average: 18.09747719428839
+ndcg_cut_5 average: 25.362429416843984
+ndcg_cut_10 average: 28.73526968778987
+map_cut_2 average: 15.5113885238721
+map_cut_5 average: 20.59424733537743
+map_cut_10 average: 22.291020644886174
+aucroc average: 49.053968540951
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STE.sum.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5361
+Epoch: 000, Validation Loss: 0.3934
+Validation AUC Epoch 0: 0.7622
+Epoch: 001, Training Loss: -365754.7693
+Epoch: 001, Validation Loss: 206577.2638
+Validation AUC Epoch 1: 0.5383
+Epoch: 002, Training Loss: -298350696.1674
+Epoch: 002, Validation Loss: 67762768.7627
+Validation AUC Epoch 2: 0.4988
+Epoch: 003, Training Loss: -5264571426.6927
+Epoch: 003, Validation Loss: 947739437.1048
+Validation AUC Epoch 3: 0.4984
+Epoch: 004, Training Loss: -32353642949.1795
+Epoch: 004, Validation Loss: 4537385369.4797
+Validation AUC Epoch 4: 0.5055
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.83818477671307
+P_2 average: 13.209606986899564
+P_5 average: 9.65065502183406
+P_10 average: 5.995633187772927
+recall_2 average: 20.54585152838428
+recall_5 average: 36.73944687045124
+recall_10 average: 45.713245997088784
+ndcg_cut_2 average: 18.57181895098948
+ndcg_cut_5 average: 26.057637229690183
+ndcg_cut_10 average: 29.143444802288776
+map_cut_2 average: 16.350072780203785
+map_cut_5 average: 21.426552644347403
+map_cut_10 average: 22.891208035858686
+aucroc average: 49.83818477671307
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STE.fusion.csv
+Complete: gnn_model=gs, graph_type=STE, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+preparing data ...
+experts pkl found!
+teams pkl found!
+data saved
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5154
+Epoch: 000, Validation Loss: 0.4344
+Validation AUC Epoch 0: 0.6735
+Epoch: 001, Training Loss: 0.4865
+Epoch: 001, Validation Loss: 0.4244
+Validation AUC Epoch 1: 0.7158
+Epoch: 002, Training Loss: 0.4793
+Epoch: 002, Validation Loss: 0.3999
+Validation AUC Epoch 2: 0.7792
+Epoch: 003, Training Loss: -13.9673
+Epoch: 003, Validation Loss: 14.3670
+Validation AUC Epoch 3: 0.5541
+Epoch: 004, Training Loss: -77284.4208
+Epoch: 004, Validation Loss: 8932.3895
+Validation AUC Epoch 4: 0.5216
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 51.66344370666529
+P_2 average: 17.802533857579732
+P_5 average: 14.757536041939709
+P_10 average: 9.602446483180426
+recall_2 average: 23.880151448958788
+recall_5 average: 47.19164118246687
+recall_10 average: 60.28760739769913
+ndcg_cut_2 average: 22.52677428191799
+ndcg_cut_5 average: 33.47038211411719
+ndcg_cut_10 average: 38.37863705272896
+map_cut_2 average: 18.792412989660697
+map_cut_5 average: 26.815906994806078
+map_cut_10 average: 29.53578796452322
+aucroc average: 51.66344370666529
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STEL.sum.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5151
+Epoch: 000, Validation Loss: 0.4352
+Validation AUC Epoch 0: 0.6718
+Epoch: 001, Training Loss: 0.4862
+Epoch: 001, Validation Loss: 0.4200
+Validation AUC Epoch 1: 0.7335
+Epoch: 002, Training Loss: 0.4798
+Epoch: 002, Validation Loss: 0.3990
+Validation AUC Epoch 2: 0.7870
+Epoch: 003, Training Loss: 0.4645
+Epoch: 003, Validation Loss: 0.3952
+Validation AUC Epoch 3: 0.8074
+Epoch: 004, Training Loss: -8812.2599
+Epoch: 004, Validation Loss: 1830.5825
+Validation AUC Epoch 4: 0.5445
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 53.564566684692096
+P_2 average: 18.247377622377623
+P_5 average: 16.433566433566433
+P_10 average: 11.538461538461538
+recall_2 average: 22.89335664335664
+recall_5 average: 48.417103729603724
+recall_10 average: 65.442162004662
+ndcg_cut_2 average: 22.36513464323381
+ndcg_cut_5 average: 34.3179039035593
+ndcg_cut_10 average: 40.973157008124886
+map_cut_2 average: 17.91848776223776
+map_cut_5 average: 26.923611111111107
+map_cut_10 average: 30.75876814158064
+aucroc average: 53.564566684692096
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STEL.fusion.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5149
+Epoch: 000, Validation Loss: 0.4326
+Validation AUC Epoch 0: 0.6815
+Epoch: 001, Training Loss: 0.4860
+Epoch: 001, Validation Loss: 0.4206
+Validation AUC Epoch 1: 0.7340
+Epoch: 002, Training Loss: 0.4794
+Epoch: 002, Validation Loss: 0.3981
+Validation AUC Epoch 2: 0.7873
+Epoch: 003, Training Loss: -8.1824
+Epoch: 003, Validation Loss: 11.6447
+Validation AUC Epoch 3: 0.5604
+Epoch: 004, Training Loss: -50467.0044
+Epoch: 004, Validation Loss: 4134.2318
+Validation AUC Epoch 4: 0.5243
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.99242813741166
+P_2 average: 14.270104895104897
+P_5 average: 10.157342657342657
+P_10 average: 6.389860139860139
+recall_2 average: 21.721299533799534
+recall_5 average: 37.975670163170165
+recall_10 average: 47.64204545454545
+ndcg_cut_2 average: 19.477487365139087
+ndcg_cut_5 average: 27.095759974224915
+ndcg_cut_10 average: 30.476985560421145
+map_cut_2 average: 16.971882284382282
+map_cut_5 average: 22.32797931235431
+map_cut_10 average: 23.967838295963297
+aucroc average: 49.99242813741166
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STEL.sum.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5151
+Epoch: 000, Validation Loss: 0.4336
+Validation AUC Epoch 0: 0.6803
+Epoch: 001, Training Loss: 0.4859
+Epoch: 001, Validation Loss: 0.4240
+Validation AUC Epoch 1: 0.7300
+Epoch: 002, Training Loss: 0.4793
+Epoch: 002, Validation Loss: 0.3978
+Validation AUC Epoch 2: 0.7810
+Epoch: 003, Training Loss: -0.0400
+Epoch: 003, Validation Loss: 1.8785
+Validation AUC Epoch 3: 0.6370
+Epoch: 004, Training Loss: -33662.1115
+Epoch: 004, Validation Loss: 3090.1036
+Validation AUC Epoch 4: 0.5026
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 50.49766264575194
+P_2 average: 15.319055944055945
+P_5 average: 12.674825174825175
+P_10 average: 8.395979020979022
+recall_2 average: 21.094842657342657
+recall_5 average: 41.611305361305355
+recall_10 average: 54.6685606060606
+ndcg_cut_2 average: 19.52999891336659
+ndcg_cut_5 average: 29.08684088261254
+ndcg_cut_10 average: 33.90085012440606
+map_cut_2 average: 16.190632284382282
+map_cut_5 average: 23.187208624708624
+map_cut_10 average: 25.742351976726972
+aucroc average: 50.49766264575194
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STEL.fusion.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5151
+Epoch: 000, Validation Loss: 0.4326
+Validation AUC Epoch 0: 0.6835
+Epoch: 001, Training Loss: 0.4862
+Epoch: 001, Validation Loss: 0.4248
+Validation AUC Epoch 1: 0.7202
+Epoch: 002, Training Loss: 0.4804
+Epoch: 002, Validation Loss: 0.3999
+Validation AUC Epoch 2: 0.7740
+Epoch: 003, Training Loss: 0.4700
+Epoch: 003, Validation Loss: 0.3886
+Validation AUC Epoch 3: 0.7928
+Epoch: 004, Training Loss: -2068.3069
+Epoch: 004, Validation Loss: 359.1793
+Validation AUC Epoch 4: 0.5519
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 55.504364242946046
+P_2 average: 21.653543307086615
+P_5 average: 17.961504811898514
+P_10 average: 14.072615923009623
+recall_2 average: 23.918885139357577
+recall_5 average: 47.99139690871973
+recall_10 average: 71.3890971961838
+ndcg_cut_2 average: 25.6342398019679
+ndcg_cut_5 average: 35.94681433459918
+ndcg_cut_10 average: 45.35513802666814
+map_cut_2 average: 19.525423905345164
+map_cut_5 average: 28.071931980724635
+map_cut_10 average: 33.65895454371113
+aucroc average: 55.504364242946046
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STEL.sum.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5147
+Epoch: 000, Validation Loss: 0.4335
+Validation AUC Epoch 0: 0.6780
+Epoch: 001, Training Loss: 0.4860
+Epoch: 001, Validation Loss: 0.4202
+Validation AUC Epoch 1: 0.7367
+Epoch: 002, Training Loss: 0.4792
+Epoch: 002, Validation Loss: 0.3994
+Validation AUC Epoch 2: 0.7844
+Epoch: 003, Training Loss: -572.8706
+Epoch: 003, Validation Loss: 718.8923
+Validation AUC Epoch 3: 0.5238
+Epoch: 004, Training Loss: -612401.6988
+Epoch: 004, Validation Loss: 232961.5027
+Validation AUC Epoch 4: 0.5273
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 51.06029479035358
+P_2 average: 13.14060446780552
+P_5 average: 9.303547963206308
+P_10 average: 5.703022339027595
+recall_2 average: 20.34603591765221
+recall_5 average: 35.57818659658344
+recall_10 average: 42.882172579938675
+ndcg_cut_2 average: 18.789950411000923
+ndcg_cut_5 average: 25.77169112359437
+ndcg_cut_10 average: 28.357827741279994
+map_cut_2 average: 16.739670024821145
+map_cut_5 average: 21.577480897454613
+map_cut_10 average: 22.846079372032065
+aucroc average: 51.06029479035358
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d32.nn[20].fs0.STEL.fusion.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5257
+Epoch: 000, Validation Loss: 0.4223
+Validation AUC Epoch 0: 0.7111
+Epoch: 001, Training Loss: 0.4804
+Epoch: 001, Validation Loss: 0.3894
+Validation AUC Epoch 1: 0.7919
+Epoch: 002, Training Loss: -6540.3054
+Epoch: 002, Validation Loss: 16078.9742
+Validation AUC Epoch 2: 0.5021
+Epoch: 003, Training Loss: -5995207.0195
+Epoch: 003, Validation Loss: 4038095.9026
+Validation AUC Epoch 3: 0.5102
+Epoch: 004, Training Loss: -110850517.5331
+Epoch: 004, Validation Loss: 47393359.5559
+Validation AUC Epoch 4: 0.5216
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 50.11150353764508
+P_2 average: 11.11111111111111
+P_5 average: 8.145231846019248
+P_10 average: 5.030621172353456
+recall_2 average: 17.557596967045782
+recall_5 average: 31.606153397491983
+recall_10 average: 38.988043161271506
+ndcg_cut_2 average: 15.907047222450622
+ndcg_cut_5 average: 22.43363664093411
+ndcg_cut_10 average: 24.977613732617836
+map_cut_2 average: 14.159375911344412
+map_cut_5 average: 18.516780888500048
+map_cut_10 average: 19.71613907057914
+aucroc average: 50.11150353764508
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STEL.sum.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5256
+Epoch: 000, Validation Loss: 0.4257
+Validation AUC Epoch 0: 0.7038
+Epoch: 001, Training Loss: 0.4803
+Epoch: 001, Validation Loss: 0.3937
+Validation AUC Epoch 1: 0.7845
+Epoch: 002, Training Loss: -22948.6710
+Epoch: 002, Validation Loss: 7702.1209
+Validation AUC Epoch 2: 0.5066
+Epoch: 003, Training Loss: -9183095.3486
+Epoch: 003, Validation Loss: 1108187.7596
+Validation AUC Epoch 3: 0.5123
+Epoch: 004, Training Loss: -114165169.4428
+Epoch: 004, Validation Loss: 10317579.4524
+Validation AUC Epoch 4: 0.5130
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 50.205375359886204
+P_2 average: 13.571117877337974
+P_5 average: 9.604175728577644
+P_10 average: 5.937364071335363
+recall_2 average: 20.7880237784544
+recall_5 average: 35.96853704509207
+recall_10 average: 45.03769754965926
+ndcg_cut_2 average: 18.96284273916685
+ndcg_cut_5 average: 26.008381061830182
+ndcg_cut_10 average: 29.07499503037499
+map_cut_2 average: 16.58329708568943
+map_cut_5 average: 21.588492581315545
+map_cut_10 average: 22.976273903307394
+aucroc average: 50.205375359886204
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STEL.fusion.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5254
+Epoch: 000, Validation Loss: 0.4258
+Validation AUC Epoch 0: 0.7062
+Epoch: 001, Training Loss: 0.4806
+Epoch: 001, Validation Loss: 0.3948
+Validation AUC Epoch 1: 0.7795
+Epoch: 002, Training Loss: -2455.4251
+Epoch: 002, Validation Loss: 4352.8642
+Validation AUC Epoch 2: 0.5285
+Epoch: 003, Training Loss: -4731460.2952
+Epoch: 003, Validation Loss: 2411897.5032
+Validation AUC Epoch 3: 0.5129
+Epoch: 004, Training Loss: -94245183.3312
+Epoch: 004, Validation Loss: 36692573.0444
+Validation AUC Epoch 4: 0.5267
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 50.98476802451468
+P_2 average: 14.320069960647135
+P_5 average: 9.986882378662003
+P_10 average: 6.257105378224748
+recall_2 average: 21.921002769275617
+recall_5 average: 38.17519312053636
+recall_10 average: 47.98571636787641
+ndcg_cut_2 average: 20.108146934717045
+ndcg_cut_5 average: 27.56093992605189
+ndcg_cut_10 average: 30.94296111577591
+map_cut_2 average: 17.74887042705145
+map_cut_5 average: 22.907472185784382
+map_cut_10 average: 24.53013293448361
+aucroc average: 50.98476802451468
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STEL.sum.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5252
+Epoch: 000, Validation Loss: 0.4252
+Validation AUC Epoch 0: 0.7065
+Epoch: 001, Training Loss: 0.4801
+Epoch: 001, Validation Loss: 0.3862
+Validation AUC Epoch 1: 0.7887
+Epoch: 002, Training Loss: -6073.1332
+Epoch: 002, Validation Loss: 1339.7991
+Validation AUC Epoch 2: 0.5156
+Epoch: 003, Training Loss: -3970504.6642
+Epoch: 003, Validation Loss: 458482.9078
+Validation AUC Epoch 3: 0.5027
+Epoch: 004, Training Loss: -83242240.7809
+Epoch: 004, Validation Loss: 8563890.1668
+Validation AUC Epoch 4: 0.5278
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 50.5107497848863
+P_2 average: 12.839614373356707
+P_5 average: 9.062226117440842
+P_10 average: 5.5784399649430325
+recall_2 average: 19.151329243353782
+recall_5 average: 33.82705229330997
+recall_10 average: 41.806164183464794
+ndcg_cut_2 average: 17.45899443463427
+ndcg_cut_5 average: 24.191381500964837
+ndcg_cut_10 average: 26.95119498399116
+map_cut_2 average: 15.051489921121824
+map_cut_5 average: 19.850788781770376
+map_cut_10 average: 21.158547570357385
+aucroc average: 50.5107497848863
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STEL.fusion.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5252
+Epoch: 000, Validation Loss: 0.4226
+Validation AUC Epoch 0: 0.7128
+Epoch: 001, Training Loss: 0.4805
+Epoch: 001, Validation Loss: 0.3942
+Validation AUC Epoch 1: 0.7737
+Epoch: 002, Training Loss: -12353.3324
+Epoch: 002, Validation Loss: 4156.0496
+Validation AUC Epoch 2: 0.4974
+Epoch: 003, Training Loss: -7500347.6707
+Epoch: 003, Validation Loss: 988427.5382
+Validation AUC Epoch 3: 0.5030
+Epoch: 004, Training Loss: -112557312.3954
+Epoch: 004, Validation Loss: 13334724.6526
+Validation AUC Epoch 4: 0.5241
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 50.62412632276173
+P_2 average: 12.111937035417577
+P_5 average: 8.80629645824224
+P_10 average: 5.395714910362921
+recall_2 average: 19.410435796531118
+recall_5 average: 34.75440897828305
+recall_10 average: 42.63955691590147
+ndcg_cut_2 average: 17.588728025846088
+ndcg_cut_5 average: 24.722829482973232
+ndcg_cut_10 average: 27.439972844971344
+map_cut_2 average: 15.75936452412185
+map_cut_5 average: 20.62351212165379
+map_cut_10 average: 21.90390012099675
+aucroc average: 50.62412632276173
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STEL.sum.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5258
+Epoch: 000, Validation Loss: 0.4243
+Validation AUC Epoch 0: 0.7046
+Epoch: 001, Training Loss: 0.4811
+Epoch: 001, Validation Loss: 0.3892
+Validation AUC Epoch 1: 0.7929
+Epoch: 002, Training Loss: -10479.4706
+Epoch: 002, Validation Loss: 8140.0359
+Validation AUC Epoch 2: 0.5196
+Epoch: 003, Training Loss: -3847389.3663
+Epoch: 003, Validation Loss: 1753565.9522
+Validation AUC Epoch 3: 0.4937
+Epoch: 004, Training Loss: -58227095.0566
+Epoch: 004, Validation Loss: 20009695.1750
+Validation AUC Epoch 4: 0.5114
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.414611407225586
+P_2 average: 12.041083916083917
+P_5 average: 8.671328671328672
+P_10 average: 5.463286713286713
+recall_2 average: 18.753642191142188
+recall_5 average: 33.431672494172496
+recall_10 average: 42.05638111888112
+ndcg_cut_2 average: 16.7591229795367
+ndcg_cut_5 average: 23.50725251480787
+ndcg_cut_10 average: 26.464301400068425
+map_cut_2 average: 14.619755244755245
+map_cut_5 average: 19.24752331002331
+map_cut_10 average: 20.62225679413179
+aucroc average: 49.414611407225586
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d64.nn[20].fs0.STEL.fusion.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5867
+Epoch: 000, Validation Loss: 0.4082
+Validation AUC Epoch 0: 0.7409
+Epoch: 001, Training Loss: -130877.2191
+Epoch: 001, Validation Loss: 186314.9137
+Validation AUC Epoch 1: 0.4905
+Epoch: 002, Training Loss: -109777894.7632
+Epoch: 002, Validation Loss: 32585327.8349
+Validation AUC Epoch 2: 0.5263
+Epoch: 003, Training Loss: -1538715796.6651
+Epoch: 003, Validation Loss: 291510769.2708
+Validation AUC Epoch 3: 0.5092
+Epoch: 004, Training Loss: -7996714613.7309
+Epoch: 004, Validation Loss: 1156772910.4080
+Validation AUC Epoch 4: 0.5286
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.37127101789912
+P_2 average: 13.123359580052494
+P_5 average: 8.9501312335958
+P_10 average: 5.402449693788276
+recall_2 average: 21.001020705745113
+recall_5 average: 35.2872557596967
+recall_10 average: 42.953484981044035
+ndcg_cut_2 average: 18.645964749514647
+ndcg_cut_5 average: 25.268561804583005
+ndcg_cut_10 average: 27.849080798241506
+map_cut_2 average: 16.595581802274715
+map_cut_5 average: 21.201516477107027
+map_cut_10 average: 22.374850713105307
+aucroc average: 49.37127101789912
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STEL.sum.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5885
+Epoch: 000, Validation Loss: 0.4046
+Validation AUC Epoch 0: 0.7380
+Epoch: 001, Training Loss: -45683.0032
+Epoch: 001, Validation Loss: 7283.6831
+Validation AUC Epoch 1: 0.5030
+Epoch: 002, Training Loss: -77743150.2366
+Epoch: 002, Validation Loss: 4058822.7182
+Validation AUC Epoch 2: 0.5055
+Epoch: 003, Training Loss: -1259510927.4594
+Epoch: 003, Validation Loss: 56917935.7807
+Validation AUC Epoch 3: 0.5409
+Epoch: 004, Training Loss: -6566477995.1975
+Epoch: 004, Validation Loss: 183715161.1979
+Validation AUC Epoch 4: 0.5320
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.682245525221475
+P_2 average: 12.976764576939939
+P_5 average: 8.925909688733013
+P_10 average: 5.681718544498027
+recall_2 average: 19.249598129475377
+recall_5 average: 33.716937015928686
+recall_10 average: 43.4422037118223
+ndcg_cut_2 average: 17.437147439494723
+ndcg_cut_5 average: 23.959362952564447
+ndcg_cut_10 average: 27.27638514759577
+map_cut_2 average: 14.955063568610258
+map_cut_5 average: 19.644831701495445
+map_cut_10 average: 21.1933466942235
+aucroc average: 49.682245525221475
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STEL.fusion.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5857
+Epoch: 000, Validation Loss: 0.4049
+Validation AUC Epoch 0: 0.7373
+Epoch: 001, Training Loss: -96502.1611
+Epoch: 001, Validation Loss: 15082.1728
+Validation AUC Epoch 1: 0.5068
+Epoch: 002, Training Loss: -70709661.6125
+Epoch: 002, Validation Loss: 2590548.7181
+Validation AUC Epoch 2: 0.5319
+Epoch: 003, Training Loss: -1070529363.3729
+Epoch: 003, Validation Loss: 23486913.9319
+Validation AUC Epoch 3: 0.5322
+Epoch: 004, Training Loss: -5977927686.7890
+Epoch: 004, Validation Loss: 103500684.4725
+Validation AUC Epoch 4: 0.5260
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 50.52219838080991
+P_2 average: 13.197189284145805
+P_5 average: 9.828722002635047
+P_10 average: 6.170399648660519
+recall_2 average: 20.148587322500365
+recall_5 average: 36.6783779827258
+recall_10 average: 45.98594642072902
+ndcg_cut_2 average: 18.037355875228045
+ndcg_cut_5 average: 25.860181365172625
+ndcg_cut_10 average: 29.091195143219572
+map_cut_2 average: 15.723905723905723
+map_cut_5 average: 21.100070755867854
+map_cut_10 average: 22.630314532488445
+aucroc average: 50.52219838080991
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STEL.sum.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5857
+Epoch: 000, Validation Loss: 0.4038
+Validation AUC Epoch 0: 0.7466
+Epoch: 001, Training Loss: -286606.1053
+Epoch: 001, Validation Loss: 24141.0711
+Validation AUC Epoch 1: 0.5024
+Epoch: 002, Training Loss: -100871570.5706
+Epoch: 002, Validation Loss: 3693707.6023
+Validation AUC Epoch 2: 0.5092
+Epoch: 003, Training Loss: -1366724107.9112
+Epoch: 003, Validation Loss: 43049607.3197
+Validation AUC Epoch 3: 0.5302
+Epoch: 004, Training Loss: -7527029519.7034
+Epoch: 004, Validation Loss: 235666731.8896
+Validation AUC Epoch 4: 0.5129
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 49.37533899837281
+P_2 average: 12.767818102317447
+P_5 average: 9.365981635330128
+P_10 average: 5.846086576300831
+recall_2 average: 19.476023903221105
+recall_5 average: 35.90220084535782
+recall_10 average: 45.12097361900597
+ndcg_cut_2 average: 17.657094465192884
+ndcg_cut_5 average: 25.279656131645616
+ndcg_cut_10 average: 28.405855590395635
+map_cut_2 average: 15.688310741874362
+map_cut_5 average: 20.878516251275325
+map_cut_10 average: 22.330237273940813
+aucroc average: 49.37533899837281
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STEL.fusion.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5845
+Epoch: 000, Validation Loss: 0.4030
+Validation AUC Epoch 0: 0.7398
+Epoch: 001, Training Loss: -159741.5543
+Epoch: 001, Validation Loss: 197756.3168
+Validation AUC Epoch 1: 0.4981
+Epoch: 002, Training Loss: -89418332.2159
+Epoch: 002, Validation Loss: 26496991.9387
+Validation AUC Epoch 2: 0.5077
+Epoch: 003, Training Loss: -1312700490.4592
+Epoch: 003, Validation Loss: 220329335.7913
+Validation AUC Epoch 3: 0.5209
+Epoch: 004, Training Loss: -6688771791.8525
+Epoch: 004, Validation Loss: 943746159.9020
+Validation AUC Epoch 4: 0.5090
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 48.74344603145905
+P_2 average: 12.390734265734265
+P_5 average: 9.353146853146853
+P_10 average: 5.712412587412587
+recall_2 average: 19.755244755244757
+recall_5 average: 36.38548951048951
+recall_10 average: 44.14335664335664
+ndcg_cut_2 average: 17.595524474600133
+ndcg_cut_5 average: 25.404876741169346
+ndcg_cut_10 average: 28.088569833730375
+map_cut_2 average: 15.523018648018647
+map_cut_5 average: 20.799885878010876
+map_cut_10 average: 22.09883288008288
+aucroc average: 48.74344603145905
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STEL.sum.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete for STEL graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.5847
+Epoch: 000, Validation Loss: 0.4080
+Validation AUC Epoch 0: 0.7334
+Epoch: 001, Training Loss: -529520.2931
+Epoch: 001, Validation Loss: 54897.5288
+Validation AUC Epoch 1: 0.4988
+Epoch: 002, Training Loss: -198081349.6804
+Epoch: 002, Validation Loss: 86478418.1979
+Validation AUC Epoch 2: 0.5155
+Epoch: 003, Training Loss: -4288878517.1794
+Epoch: 003, Validation Loss: 1434247321.5993
+Validation AUC Epoch 3: 0.5298
+Epoch: 004, Training Loss: -33803020873.1006
+Epoch: 004, Validation Loss: 9482088901.6069
+Validation AUC Epoch 4: 0.5399
+Sorting...
+Creating qrel and run dictionaries...
+AUC-ROC: 50.474597721930934
+P_2 average: 11.853637160385627
+P_5 average: 8.194566170026294
+P_10 average: 5.065731814198073
+recall_2 average: 18.586765994741455
+recall_5 average: 31.50087642418931
+recall_10 average: 38.8737949167397
+ndcg_cut_2 average: 16.679349904604685
+ndcg_cut_5 average: 22.721345427242753
+ndcg_cut_10 average: 25.247729596561257
+map_cut_2 average: 14.650160677768037
+map_cut_5 average: 18.911067289901645
+map_cut_10 average: 20.10114062666648
+aucroc average: 50.474597721930934
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gs.e5.lr0.001.d128.nn[20].fs0.STEL.fusion.csv
+Complete: gnn_model=gs, graph_type=STEL, num_neighbors = 20 10 5, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6938
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.07196569145811303
+P_5 average: 0.06697215368346845
+P_10 average: 0.0569850781341793
+recall_2 average: 0.058111071946108935
+recall_5 average: 0.12960351962819355
+recall_10 average: 0.21843813701409756
+ndcg_cut_2 average: 0.07376514222383486
+ndcg_cut_5 average: 0.10415777586903847
+ndcg_cut_10 average: 0.14227531153042802
+map_cut_2 average: 0.042934633611404836
+map_cut_5 average: 0.06322564045657689
+map_cut_10 average: 0.0766171571306103
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d32.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6938
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.016155563388555987
+P_5 average: 0.03231112677711198
+P_10 average: 0.05904124074726824
+recall_2 average: 0.011015156855833624
+recall_5 average: 0.059383934516116385
+recall_10 average: 0.2201073121059021
+ndcg_cut_2 average: 0.01781734215670101
+ndcg_cut_5 average: 0.04331714284837925
+ndcg_cut_10 average: 0.11502882084310122
+map_cut_2 average: 0.00930168801159284
+map_cut_5 average: 0.024210498831577436
+map_cut_10 average: 0.049000196757510814
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d32.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6938
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.07637175420044648
+P_5 average: 0.058747503231112684
+P_10 average: 0.07167195394195748
+recall_2 average: 0.06090157834958681
+recall_5 average: 0.11597736262875494
+recall_10 average: 0.2782673403047037
+ndcg_cut_2 average: 0.0842074351525958
+ndcg_cut_5 average: 0.10363862579366814
+ndcg_cut_10 average: 0.17390509653412833
+map_cut_2 average: 0.05106137155837543
+map_cut_5 average: 0.06748619433674068
+map_cut_10 average: 0.09055265159497917
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d32.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6938
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.058747503231112684
+P_5 average: 0.05052285277875689
+P_10 average: 0.050816590294912464
+recall_2 average: 0.04320738987640644
+recall_5 average: 0.09617805528979304
+recall_10 average: 0.1917406605457363
+ndcg_cut_2 average: 0.05148791070369497
+ndcg_cut_5 average: 0.07164529520534559
+ndcg_cut_10 average: 0.11183867563366455
+map_cut_2 average: 0.02553418265438005
+map_cut_5 average: 0.041143067887868735
+map_cut_10 average: 0.053636140189571024
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d32.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20 10, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6938
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.032311126777111975
+P_5 average: 0.031136176712489725
+P_10 average: 0.04347315239102338
+recall_2 average: 0.025506207652841423
+recall_5 average: 0.05816002819880155
+recall_10 average: 0.1629893527144144
+ndcg_cut_2 average: 0.03349969265668118
+ndcg_cut_5 average: 0.04611849169551462
+ndcg_cut_10 average: 0.09038723571277825
+map_cut_2 average: 0.01835859475972271
+map_cut_5 average: 0.02863124844971866
+map_cut_10 average: 0.04253051140167813
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d32.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=sum
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6938
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.04259193984255669
+P_5 average: 0.03113617671248972
+P_10 average: 0.03965456468100106
+recall_2 average: 0.03304547056750088
+recall_5 average: 0.06144009712920534
+recall_10 average: 0.14916970195433363
+ndcg_cut_2 average: 0.04491843011795973
+ndcg_cut_5 average: 0.0539021178277481
+ndcg_cut_10 average: 0.09155940631888514
+map_cut_2 average: 0.02717072024438961
+map_cut_5 average: 0.03548512382668181
+map_cut_10 average: 0.04756605053279944
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d32.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20 10 5, dim = 32, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6957
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.029373751615556342
+P_5 average: 0.04288567735871226
+P_10 average: 0.047879215133356835
+recall_2 average: 0.023743782555908036
+recall_5 average: 0.07989660439431323
+recall_10 average: 0.18266277254645244
+ndcg_cut_2 average: 0.027431851146202703
+ndcg_cut_5 average: 0.05592178893866268
+ndcg_cut_10 average: 0.0992318187029529
+map_cut_2 average: 0.015298828966435595
+map_cut_5 average: 0.031454392354991575
+map_cut_10 average: 0.045435870728139545
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d64.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6957
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.08077781694277994
+P_5 average: 0.06520972858653508
+P_10 average: 0.05434144048877922
+recall_2 average: 0.06481807856499432
+recall_5 average: 0.1265519132103552
+recall_10 average: 0.2051266987819684
+ndcg_cut_2 average: 0.08476449341764296
+ndcg_cut_5 average: 0.10560297073505685
+ndcg_cut_10 average: 0.14042592400384196
+map_cut_2 average: 0.05098793717933655
+map_cut_5 average: 0.06750659277536261
+map_cut_10 average: 0.07908678638102326
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d64.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6957
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.06168487839266831
+P_5 average: 0.06462225355422395
+P_10 average: 0.06550346610269063
+recall_2 average: 0.04587200877296048
+recall_5 average: 0.11654618766004034
+recall_10 average: 0.236539234600567
+ndcg_cut_2 average: 0.05883294117626906
+ndcg_cut_5 average: 0.08998787359170704
+ndcg_cut_10 average: 0.14070978625875757
+map_cut_2 average: 0.031429914228645287
+map_cut_5 average: 0.04959734647785404
+map_cut_10 average: 0.0662880717972238
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d64.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6957
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.03965456468100106
+P_5 average: 0.05228527787569028
+P_10 average: 0.05140406532722359
+recall_2 average: 0.027933039036317147
+recall_5 average: 0.10074264304084538
+recall_10 average: 0.1963052482967886
+ndcg_cut_2 average: 0.035333939883823995
+ndcg_cut_5 average: 0.07032391789764714
+ndcg_cut_10 average: 0.11172864884668521
+map_cut_2 average: 0.018127800997029056
+map_cut_5 average: 0.03801662834091454
+map_cut_10 average: 0.05258014216274115
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d64.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20 10, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6958
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6935
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.06755962871577958
+P_5 average: 0.049935377746445776
+P_10 average: 0.05874750323111269
+recall_2 average: 0.05003329025183096
+recall_5 average: 0.09115654251360983
+recall_10 average: 0.21546473344146944
+ndcg_cut_2 average: 0.062294170710135904
+ndcg_cut_5 average: 0.07426157265453902
+ndcg_cut_10 average: 0.12681738801165693
+map_cut_2 average: 0.03277621117769161
+map_cut_5 average: 0.0439667946056737
+map_cut_10 average: 0.06031900424084068
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d64.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=sum
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6957
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.07049700387733521
+P_5 average: 0.051697802843379166
+P_10 average: 0.09047115497591353
+recall_2 average: 0.050571809031449484
+recall_5 average: 0.09259026134246437
+recall_10 average: 0.3423440813289244
+ndcg_cut_2 average: 0.06717344634104518
+ndcg_cut_5 average: 0.07989979509825437
+ndcg_cut_10 average: 0.18776032411338564
+map_cut_2 average: 0.036790623898484316
+map_cut_5 average: 0.04742986667114266
+map_cut_10 average: 0.08430060231510456
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d64.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20 10 5, dim = 64, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6943
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.04846669016566796
+P_5 average: 0.0593349782634238
+P_10 average: 0.05404770297262366
+recall_2 average: 0.03715779579367877
+recall_5 average: 0.10871318722922531
+recall_10 average: 0.20403101122170555
+ndcg_cut_2 average: 0.05458835829725185
+ndcg_cut_5 average: 0.08750468892244716
+ndcg_cut_10 average: 0.1275657890034832
+map_cut_2 average: 0.03258038616692124
+map_cut_5 average: 0.05166866221677642
+map_cut_10 average: 0.06580390596296483
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d128.nn[20].fs0.SE.sum.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=sum
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6943
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6931
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.7033
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
+Epoch: 004, Training Loss: 0.6931
+Epoch: 004, Validation Loss: 0.6931
+Validation AUC Epoch 4: 0.5000
+Sorting...
+Creating qrel and run dictionaries...
+creating runs for Skill/Expert graph results...
+AUC-ROC: 50.0
+P_2 average: 0.03671718951944542
+P_5 average: 0.03231112677711198
+P_10 average: 0.04347315239102338
+recall_2 average: 0.028884189088630403
+recall_5 average: 0.06219669376172724
+recall_10 average: 0.17364560301641727
+ndcg_cut_2 average: 0.04084472312925528
+ndcg_cut_5 average: 0.05281464683025603
+ndcg_cut_10 average: 0.09762654411820523
+map_cut_2 average: 0.024845298241491398
+map_cut_5 average: 0.03311222909389987
+map_cut_10 average: 0.04793002402346193
+aucroc average: 50.0
+Aggregated metrics saved to ../output/NewSplitMethod/dblp/eval.gin.e5.lr0.001.d128.nn[20].fs0.SE.fusion.csv
+Complete: gnn_model=gin, graph_type=SE, num_neighbors = 20, dim = 128, full_subgraph=0, eval_method=fusion
+Running: gnn_model=gin, graph_type=SE, num_neighbors = 20 10, dim = 128, full_subgraph=0, eval_method=sum
+dataset path = ../data/dblp/
+data - non-complete subgraph for SE graph loaded
+splitting data
+saving splitted files
+Device: 'cpu'
+Epoch: 000, Training Loss: 0.6943
+Epoch: 000, Validation Loss: 0.6931
+Validation AUC Epoch 0: 0.5000
+Epoch: 001, Training Loss: 0.6931
+Epoch: 001, Validation Loss: 0.6931
+Validation AUC Epoch 1: 0.5000
+Epoch: 002, Training Loss: 0.6932
+Epoch: 002, Validation Loss: 0.6931
+Validation AUC Epoch 2: 0.5000
+Epoch: 003, Training Loss: 0.6931
+Epoch: 003, Validation Loss: 0.6931
+Validation AUC Epoch 3: 0.5000
