@@ -84,11 +84,11 @@ if __name__ == '__main__':
         "epoch": 5, # initially it was 10
         "lr": 0.001,
         "batch_size": 128, # initially it was 1024
-        "num_neighbors" : [20,10],
+        "num_neighbors" : None,
         "dim" : 64, # initially 64
         "graph_type": "STE",  # STE -> Skill/Team/Expert, SE -> Skill/Expert
         "full_subgraph": 0,  # 1 -> complete subgraph, 0 -> non-complete subgraph
-        "eval_method": "sum",  # "sum" -> normal, "fusion" -> 1/(60+x)
+        "eval_method": "fusion",  # "sum" -> normal, "fusion" -> 1/(60+x)
         "gnn_model" : "gs", # gs, gin, gat, gatv2, han, gine
     }
 

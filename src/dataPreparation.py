@@ -174,12 +174,12 @@ def teams_df_from_teamsvec(teamsvec):
     # Get the non-zero indices for skills, members, and locations
     skill_nonzero = teamsvec['skill'].nonzero()
     member_nonzero = teamsvec['member'].nonzero()
-    location_nonzero = teamsvec['loc'].nonzero()
+    if 'loc' in teamsvec: location_nonzero = teamsvec['loc'].nonzero()
 
     # Create dictionaries to map each team to its skills, members, and location
     team_to_skills = {i: [] for i in range(teamsvec['id'].shape[0])}
     team_to_members = {i: [] for i in range(teamsvec['id'].shape[0])}
-    team_to_location = {i: [] for i in range(teamsvec['id'].shape[0])}
+    if 'loc' in teamsvec: team_to_location = {i: [] for i in range(teamsvec['id'].shape[0])}
 
     # Populate the dictionaries
     for skill_row, skill_col in tqdm(zip(skill_nonzero[0], skill_nonzero[1]), total=len(skill_nonzero[0]),

@@ -1,5 +1,7 @@
 source ../venvs/opentf_tmp/bin/activate;
+source ../../venvs/opentf_tmp/bin/activate;
 cd ../src;
+pwd;
 
 # Define the parameter values
 gnn_models=("gs" "gin" "gat" "gatv2")
