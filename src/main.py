@@ -96,6 +96,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Optional arguments for the script")
 
     # Add optional arguments
+    parser.add_argument('--epoch', type=int, help='Number of epochs to train')
     parser.add_argument('--data_path', type=str, nargs ='+', help='Data to use')
     parser.add_argument('--gnn_model', type=str, help='GNN model to use')
     parser.add_argument('--graph_type', type=str, help='Type of graph')
@@ -108,6 +109,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Update default_parameters with provided arguments if they exist
+    if args.epoch:
+        parameters['epoch'] = args.epoch
     if args.data_path:
         parameters['data_path'] = args.data_path
     if args.gnn_model:
