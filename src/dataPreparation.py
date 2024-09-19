@@ -190,16 +190,26 @@ def teams_df_from_teamsvec(teamsvec):
                                        desc="Processing members"):
         team_to_members[member_row].append(member_col)
 
-    for loc_row, loc_col in tqdm(zip(location_nonzero[0], location_nonzero[1]), total=len(location_nonzero[0]),
-                                 desc="Processing locations"):
-        team_to_location[loc_row].append(loc_col)
+    if 'loc' in teamsvec:
+        for loc_row, loc_col in tqdm(zip(location_nonzero[0], location_nonzero[1]), total=len(location_nonzero[0]),
+                                     desc="Processing locations"):
+            team_to_location[loc_row].append(loc_col)
 
-    # Create a list of lists for DataFrame creation
-    teams_sorted = [[team_id, team_to_skills[team_id], team_to_members[team_id], team_to_location[team_id]] for team_id
-                    in range(teamsvec['id'].shape[0])]
+    if 'loc' in teamsvec:
+        # Create a list of lists for DataFrame creation
+        teams_sorted = [[team_id, team_to_skills[team_id], team_to_members[team_id], team_to_location[team_id]] for team_id
+                        in range(teamsvec['id'].shape[0])]
+    else:
+        teams_sorted = [[team_id, team_to_skills[team_id], team_to_members[team_id]] for
+                        team_id
+                        in range(teamsvec['id'].shape[0])]
 
-    # Create the DataFrame
-    teams_sorted_df = pd.DataFrame(teams_sorted, columns=['team_id', 'required_skills', 'members', 'location'])
+    if 'loc' in teamsvec:
+        # Create the DataFrame
+        teams_sorted_df = pd.DataFrame(teams_sorted, columns=['team_id', 'required_skills', 'members', 'location'])
+    else:
+        teams_sorted_df = pd.DataFrame(teams_sorted, columns=['team_id', 'required_skills', 'members'])
+
     return teams_sorted_df
 
 # def teams_df_from_teamsvec(teamsvec):
