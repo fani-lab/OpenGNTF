@@ -81,7 +81,7 @@ if __name__ == '__main__':
             # "../data/imdb/",
             "../data/dblp/",
         ],
-        "epoch": 5, # initially it was 10
+        "epoch": 10, # initially it was 10
         "lr": 0.001,
         "batch_size": 128, # initially it was 1024
         "num_neighbors" : None,

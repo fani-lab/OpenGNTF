@@ -8,7 +8,7 @@ def main(experts_df, teams_df, path, full_subgraph="", graph_type="STE"):
     # Update skillset and required_skillset with string representation
     experts_df['skillset'] = [str(row) for row in experts_df['skills']]
     teams_df['required_skillset'] = [str(row) for row in teams_df["required_skills"]]
-    teams_df['location'] = [row[0] for row in teams_df["location"]]
+    if graph_type == "STEL" : teams_df['location'] = [row[0] for row in teams_df["location"]]
 
     # Create skill mapping
     all_skills = set(skill for skills_list in experts_df['skills'] for skill in skills_list)
