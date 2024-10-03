@@ -31,7 +31,7 @@ def main(experts_df, teams_df, path, full_subgraph="", graph_type="STE"):
         data['expert'].node_id = torch.tensor(experts_df["user_id"].values, dtype=torch.long)
         data['skill'].node_id = torch.tensor(skills_df["skill_id"].values, dtype=torch.long)
         data['expert', 'has', 'skill'].edge_index = edge_index_expert_skill
-        data['expert', 'has', 'skill'].edge_attr = None
+        data['expert', 'has', 'skill'].edge_attr = torch.ones(data['expert', 'has', 'skill'].edge_index.shape[1])   # needed for gine
 
         if not full_subgraph == "":
             expert_pairs = []
@@ -94,14 +94,14 @@ def main(experts_df, teams_df, path, full_subgraph="", graph_type="STE"):
         data['team', 'requires', 'skill'].edge_index = edge_index_team_skill
         data['team', 'includes', 'expert'].edge_index = edge_index_team_experts
         data['expert', 'has', 'skill'].edge_index = edge_index_expert_skill
-        data['team', 'requires', 'skill'].edge_attr = None
-        data['team', 'includes', 'expert'].edge_attr = None
-        data['expert', 'has', 'skill'].edge_attr = None
+        data['team', 'requires', 'skill'].edge_attr = torch.ones(data['team', 'requires', 'skill'].edge_index.shape[1])     # needed for gine
+        data['team', 'includes', 'expert'].edge_attr = torch.ones(data['team', 'includes', 'expert'].edge_index.shape[1])   # needed for gine
+        data['expert', 'has', 'skill'].edge_attr = torch.ones(data['expert', 'has', 'skill'].edge_index.shape[1])           # needed for gine
 
         if graph_type == "STEL":
             data['location'].node_id = torch.tensor(teams_df["location"].values, dtype=torch.long)
             data['team', 'located_at', 'location'].edge_index = edge_index_team_location
-            data['team', 'located_at', 'location'].edge_attr = None
+            data['team', 'located_at', 'location'].edge_attr = torch.ones(data['team', 'located_at', 'location'].edge_index.shape[1])   # needed for gine
 
         if not full_subgraph == "":
             expert_pairs = []
