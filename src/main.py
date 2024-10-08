@@ -63,8 +63,7 @@ def main(params: dict):
                                         full_subgraph=subgraph, graph_type=graph_typ)
             print('data saved')
 
-            vecs = pd.read_pickle(dataset_pth + "teamsvecs.pkl") # the main teamsvecs file
-
+        vecs = pd.read_pickle(dataset_pth + "teamsvecs.pkl")  # the main teamsvecs file
         final_model = gnn.main(vecs, data, dataset_pth.split('/')[-2], epochs=params["epoch"], lr=params["lr"],
                                batch_size=params["batch_size"], test=True, full_subgraph=subgraph, graph_type=graph_typ, dim=dim, num_neighbors=num_neighbors, gnn_model=gnn_model,
                                eval_method=eval_method)

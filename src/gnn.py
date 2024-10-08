@@ -11,6 +11,8 @@ import torch.nn.functional as F
 from sklearn.metrics import roc_auc_score
 from collections import defaultdict
 import pytrec_eval
+import numpy as np
+from scipy.sparse import lil_matrix
 import gc
 
 # import all gnn models
@@ -314,30 +316,35 @@ we will pick the top_k index based on the value of k = 2, 5 or 10. In this way, 
 # create qrel and run with skills covered
 def create_qrel_and_run_with_skc(vecs, node1_index, node2_index, predictions, ground_truth, graph_type):
 
-    n_teams = vecs['id'].shape[0]           # total number of teams
-    n_skills = vecs['skill'].shape[1]       # total number of skills
-    n_experts = vecs['member'].shape[1]     # total number of experts
-
-    Y = torch.empty(())
-
     # node1_index => team
     # node2_index => expert
 
-    print("Sorting...")
-    # Sort combined elements by predictions using numpy for efficiency
-    combined_sorted = sorted(zip(node1_index, node2_index, predictions, ground_truth), key=lambda x: x[2], reverse=True)
-    print("Creating qrel and run dictionaries...")
+    n_teams = vecs['id'].shape[0]           # total number of teams
+    n_skills = vecs['skill'].shape[1]       # total number of skills
+    n_experts = vecs['member'].shape[1]     # total number of experts
+    team_indices = list(set(node1_index))   # The test team indices
+    team_indices_serialized = {team: serial for serial, team in enumerate(team_indices)}
 
+    vecs['es_vecs'] = lil_matrix(np.where(np.dot(vecs['member'].transpose(), vecs['skill']).todense() > 0, 1, 0))     # Create expert-skill co-occurrence matrix
+    actual_skills = vecs['skill'][team_indices].todense().astype(int)                                                 # Collecting actual skills of the test teams
+    Y_ = torch.zeros((len(set(node1_index)), n_experts), dtype = float)                 # Corresponding predictions
+
+    print("Sorting...")
+    combined_sorted = sorted(zip(node1_index, node2_index, predictions, ground_truth), key=lambda x: x[2], reverse=True)    # Sort combined elements by predictions using numpy for efficiency
+
+    print("Creating qrel and run dictionaries...")
     qrel = defaultdict(dict)
     run = defaultdict(dict)
 
     for idx1, idx2, pred, label in tqdm(combined_sorted, desc="Processing qrels and runs"):
-        label_int = int(label)  # Ensure the label is an integer
+        label_int = int(label)                      # Ensure the label is an integer
         qrel[str(idx1)][str(idx2)] = label_int
-        run[str(idx1)][str(idx2)] = float(pred)  # Ensure the prediction is a float
+        run[str(idx1)][str(idx2)] = float(pred)     # Ensure the prediction is a float
+        idx1_mapped = team_indices_serialized[idx1] # Map the actual index to the sorted serial of the team
+        Y_[idx1_mapped][idx2] = int(label)          # Update the relevant rows with pred and labels
 
     # Convert defaultdict back to regular dict
-    return dict(qrel), dict(run)
+    return dict(qrel), dict(run), Y_, actual_skills
 
 def merge_predictions(skills_list, preds, method):  # method:  "sum" / "fusion"
     # Use defaultdict with float for accumulation
@@ -439,7 +446,7 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
             all_ground_truth.extend(ground_truth)
 
     if graph_type == "SE":
-        qrels_, runs_ = create_qrel_and_run_with_skc(vecs, all_node2_index, all_node1_index, all_predictions, all_ground_truth,
+        qrels_, runs_, Y_, actual_skills = create_qrel_and_run_with_skc(vecs, all_node2_index, all_node1_index, all_predictions, all_ground_truth,
                                             graph_type)
         qrels = {}
 
@@ -452,10 +459,11 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
         runs = create_runs_for_SE(skills_of_teams, runs_, eval_method=eval_method)
 
     else:
-        qrels, runs = create_qrel_and_run_with_skc(vecs, all_node1_index, all_node2_index, all_predictions, all_ground_truth,
+        qrels, runs, Y_, actual_skills = create_qrel_and_run_with_skc(vecs, all_node1_index, all_node2_index, all_predictions, all_ground_truth,
                                           graph_type)
     # del qrels_, runs_
 
+    skill_coverage = calculate_skill_coverage(vecs, actual_skills, Y_, [2, 5, 10])
     aucroc = roc_auc_score(all_ground_truth, all_predictions)
     print(f'AUC-ROC: {aucroc * 100}')
 
@@ -468,14 +476,64 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
     try:
         evaluator = pytrec_eval.RelevanceEvaluator(qrels, metrics_to_evaluate)
         metrics = evaluator.evaluate(runs)
+
         aggregated_metrics = {metric: pytrec_eval.compute_aggregated_measure(
             metric, [query_metrics[metric] for query_metrics in metrics.values()]
         ) for metric in next(iter(metrics.values())).keys()}
+
         aggregated_metrics['aucroc'] = aucroc
+        aggregated_metrics['skc_2'] = skill_coverage['skc_2']
+        aggregated_metrics['skc_5'] = skill_coverage['skc_5']
+        aggregated_metrics['skc_10'] = skill_coverage['skc_10']
+
         for metric, score in aggregated_metrics.items():
             print(f'{metric} average: {score * 100}')
+
         df = pd.DataFrame([aggregated_metrics])
         df.to_csv(saving_path, index=False)
         print(f'Aggregated metrics saved to {saving_path}')
+
     except Exception as e:
         print(f'Error evaluating metrics: {e}')
+
+
+# calculate skill_coverage for k = [2, 5, 10] for example
+def calculate_skill_coverage(vecs, actual_skills, Y_, top_k):
+
+    print(f"Calculating Skill Coverage for {Y_.shape[0]} predictions")
+
+    if not isinstance(vecs['es_vecs'], np.ndarray):
+        vecs['es_vecs'] = np.where(np.asarray(vecs['es_vecs'].todense()) > 0, 1, 0)
+    skill_coverage = {}
+    top_k_y_ = convert_to_one_hot(Y_, top_k) # convert the predicted experts to one-hot encodings based on top-k recommendations
+
+    # we have to calculate skill_coverage for each value in the list top_k (2, 5 and 10 for example)
+    for k in top_k:
+        print(f"---- Calculating skc for k = {k}")
+        Y_ = top_k_y_[k] # the 1-hot converted matrix for top k recommendations
+
+        predicted_skills = np.where(np.dot(Y_, vecs['es_vecs']).astype(int) > 0, 1, 0)                                  # skill occurrence matrix of predicted members of shape (1 * |s|) for each row
+        skills_overlap = ((predicted_skills & actual_skills) > 0).astype(int)                                           # overlap of skills in each row between predicted and actual
+        skill_coverage[f'skc_{k}'] = np.average([r1.sum()/r2.sum() for r1,r2 in zip(skills_overlap,actual_skills)])     # avg coverage over all the predicted rows
+        print(f"---- Calculated skc for k = {k}")
+
+    return skill_coverage
+
+# convert the top k expert prediction probabilities into 1-hot occurrences
+# here top_k is a list of k's
+def convert_to_one_hot(y_, top_k):
+    print("Converting the prediction probabilities to 1-hot predictions")
+    top_k_matrices = {}
+
+    for k in top_k:
+        print(f"-------- Converting for k = {k}")
+        result = np.zeros_like(y_)
+
+        for i in tqdm(range(y_.shape[0])):
+            top_k_indices = np.argsort(y_[i])[-k:] # get the indices of the top k values
+            result[i, top_k_indices] = 1 # set the top k values to 1
+
+        top_k_matrices[k] = result
+        print(f"-------- Converted for k = {k}\n")
+
+    return top_k_matrices # |test_instances| * |num_test_instance_experts| for each k in top_k
