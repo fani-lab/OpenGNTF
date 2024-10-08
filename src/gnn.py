@@ -22,7 +22,8 @@ from gine import GINE
 
 from torch.nn import Linear, Sequential, BatchNorm1d, ReLU
 
-def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", dim=64, num_neighbors=None, gnn_model="gs", eval_method="sum"):
+# we need vecs for skill coverage
+def main(vecs, data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", dim=64, num_neighbors=None, gnn_model="gs", eval_method="sum"):
     try:
         train_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/train.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
         val_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/val.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
@@ -171,7 +172,7 @@ def main(data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, ful
         tqdm.write(f"Validation AUC Epoch {epoch}: {auc:.4f}")
 
     if test:
-        evaluate(model, test_loader, device,
+        evaluate(model, vecs, test_loader, device,
                  f"../output/NewSplitMethod/{dataset_name}/eval.{gnn_model}.e{epochs}.lr{lr}.d{dim}.nn{num_neighbors}.fs{0 if full_subgraph == '' else 1}.{graph_type}.{eval_method}.csv", full_subgraph, num_neighbors, graph_type, eval_method)
         # print(f"Test evaluation results:\n{df_mean}")
 
@@ -286,6 +287,58 @@ def create_qrel_and_run(node1_index, node2_index, predictions, ground_truth, gra
     return dict(qrel), dict(run)
 
 
+'''
+
+Only while creating the qrels and runs, we access the individual prediction probabilities against each team-expert pair.
+For example - if e7 and e9 have been predicted probable for t5, then each of these probabilities are accessed only inside
+this function
+
+- We need a matrix like Y_ for skill coverage calculation just like the transfer learning Y_
+- An ideal Y and Y_ will have the respective team_id and the corresponding list of prediction probabilities
+- But an ideal Y and Y_ in the transfer learning setup does not have a team_id associated with its entry, 
+because it is directly accessed from the split indices. Here we do not have such split based prediction, 
+rather edge based prediction with no ordering
+- So we need the respective team_id to the row of the Y and Y_
+- Then we need to convert Y and Y_ to 1-hot based on the sorted prediction probabilities (Y will already have 1-hot encodings)
+- Example : There are 35 experts. For team 1, the model predicts y_ value > 0.0 for 22 experts, rest (35-22 = 13) experts get 
+prediction value = 0.0. Then we have in total 35 prediction values. Now for each team like this, we have 35 prediction values each
+as separate rows. Now for each row, we need to sort the indices of prediction values, not the prediction values themselves.
+This will be done using argsort(). Then, after having the sorted indices, suppose 22 sorted top indices of the experts, 
+we will pick the top_k index based on the value of k = 2, 5 or 10. In this way, we can locate the expert indices for a every single team
+- Subsequently, for each e in a team t, we will locate the skillset s and combine together against team t
+- Then we compare the prediction covered skillset with the given skillset of the target team t 
+
+
+'''
+
+# create qrel and run with skills covered
+def create_qrel_and_run_with_skc(vecs, node1_index, node2_index, predictions, ground_truth, graph_type):
+
+    n_teams = vecs['id'].shape[0]           # total number of teams
+    n_skills = vecs['skill'].shape[1]       # total number of skills
+    n_experts = vecs['member'].shape[1]     # total number of experts
+
+    Y = torch.empty(())
+
+    # node1_index => team
+    # node2_index => expert
+
+    print("Sorting...")
+    # Sort combined elements by predictions using numpy for efficiency
+    combined_sorted = sorted(zip(node1_index, node2_index, predictions, ground_truth), key=lambda x: x[2], reverse=True)
+    print("Creating qrel and run dictionaries...")
+
+    qrel = defaultdict(dict)
+    run = defaultdict(dict)
+
+    for idx1, idx2, pred, label in tqdm(combined_sorted, desc="Processing qrels and runs"):
+        label_int = int(label)  # Ensure the label is an integer
+        qrel[str(idx1)][str(idx2)] = label_int
+        run[str(idx1)][str(idx2)] = float(pred)  # Ensure the prediction is a float
+
+    # Convert defaultdict back to regular dict
+    return dict(qrel), dict(run)
+
 def merge_predictions(skills_list, preds, method):  # method:  "sum" / "fusion"
     # Use defaultdict with float for accumulation
     predicts = {}
@@ -320,7 +373,7 @@ def create_runs_for_SE(skills_of_teams, skills_predictions, eval_method):
     return run
 
 
-def evaluate(model, test_loader, device, saving_path, full_subgraph, num_neighbors, graph_type, eval_method):
+def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_neighbors, graph_type, eval_method):
     model.eval()
     all_ground_truth = []
     all_predictions = []
@@ -386,7 +439,7 @@ def evaluate(model, test_loader, device, saving_path, full_subgraph, num_neighbo
             all_ground_truth.extend(ground_truth)
 
     if graph_type == "SE":
-        qrels_, runs_ = create_qrel_and_run(all_node2_index, all_node1_index, all_predictions, all_ground_truth,
+        qrels_, runs_ = create_qrel_and_run_with_skc(vecs, all_node2_index, all_node1_index, all_predictions, all_ground_truth,
                                             graph_type)
         qrels = {}
 
@@ -399,7 +452,7 @@ def evaluate(model, test_loader, device, saving_path, full_subgraph, num_neighbo
         runs = create_runs_for_SE(skills_of_teams, runs_, eval_method=eval_method)
 
     else:
-        qrels, runs = create_qrel_and_run(all_node1_index, all_node2_index, all_predictions, all_ground_truth,
+        qrels, runs = create_qrel_and_run_with_skc(vecs, all_node1_index, all_node2_index, all_predictions, all_ground_truth,
                                           graph_type)
     # del qrels_, runs_
 

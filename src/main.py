@@ -58,11 +58,14 @@ def main(params: dict):
                 teams_df = dataPreparation.teams_df_from_teamsvec(pd.read_pickle(dataset_pth + "teamsvecs.pkl"))
                 pd.to_pickle(teams_df, dataset_pth + "teams_sorted.pkl")
                 print("teams pkl saved!")
+            # the graph data
             data = dataPreparation.main(experts_df, teams_df, path=dataset_pth + f'/data{subgraph}-{graph_typ}.pt',
                                         full_subgraph=subgraph, graph_type=graph_typ)
             print('data saved')
 
-        final_model = gnn.main(data, dataset_pth.split('/')[-2], epochs=params["epoch"], lr=params["lr"],
+            vecs = pd.read_pickle(dataset_pth + "teamsvecs.pkl") # the main teamsvecs file
+
+        final_model = gnn.main(vecs, data, dataset_pth.split('/')[-2], epochs=params["epoch"], lr=params["lr"],
                                batch_size=params["batch_size"], test=True, full_subgraph=subgraph, graph_type=graph_typ, dim=dim, num_neighbors=num_neighbors, gnn_model=gnn_model,
                                eval_method=eval_method)
         # nn = None means all neighbors were sampled during subgraph formation
