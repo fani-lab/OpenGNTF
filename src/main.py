@@ -106,7 +106,6 @@ if __name__ == '__main__':
     parser.add_argument('--num_neighbors', type=int, nargs='+', help='Number of neighbors for subgraph sampling')
     parser.add_argument('--full_subgraph', type=int, choices=[0, 1], help='Whether to use full subgraph')
     parser.add_argument('--eval_method', type=str, help='Evaluation method')
-    parser.add_argument('--quick_eval', type=int, help='Do we need to jump into evaluation?')
 
     # Parse the arguments
     args = parser.parse_args()
@@ -130,15 +129,3 @@ if __name__ == '__main__':
         parameters['eval_method'] = args.eval_method
 
     main(parameters)
-
-# This method is created for experimentation purposes only
-def eval(vecs, device, dataset_pth, dataset_name, full_subgraph, gnn_model, graph_type, dim, eval_method, num_neighbors, params):
-
-    # Load the model
-    model = torch.load('../output/NewSplitMethod' + '/' + dataset_pth.split('/')[-2] + f'/model.{gnn_model}.e{params["epoch"]}.lr{params["lr"]}.d{dim}.nn{num_neighbors}.fs{full_subgraph}.{graph_type}.{eval_method}.pt')
-
-    # Load test data
-    test_data = torch.load(f"../output/NewSplitMethod/{dataset_name}/test.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt")
-
-    # Define test loader
-    test_loader = None

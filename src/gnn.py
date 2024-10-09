@@ -289,7 +289,7 @@ def create_qrel_and_run(node1_index, node2_index, predictions, ground_truth, gra
     return dict(qrel), dict(run)
 
 
-'''
+"""
 
 Only while creating the qrels and runs, we access the individual prediction probabilities against each team-expert pair.
 For example - if e7 and e9 have been predicted probable for t5, then each of these probabilities are accessed only inside
@@ -310,8 +310,7 @@ we will pick the top_k index based on the value of k = 2, 5 or 10. In this way, 
 - Subsequently, for each e in a team t, we will locate the skillset s and combine together against team t
 - Then we compare the prediction covered skillset with the given skillset of the target team t 
 
-
-'''
+"""
 
 # create qrel and run with skills covered
 def create_qrel_and_run_with_skc(vecs, node1_index, node2_index, predictions, ground_truth, graph_type):
@@ -374,7 +373,6 @@ def create_runs_for_SE(skills_of_teams, skills_predictions, eval_method):
     run = {}
 
     for team, skills in tqdm(skills_of_teams.items(), desc="Processing teams"):
-
         run[team] = merge_predictions(skills_list=skills, preds=skills_predictions, method=eval_method)
 
     return run
