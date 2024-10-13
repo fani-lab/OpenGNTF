@@ -8,7 +8,7 @@ def main(experts_df, teams_df, path, full_subgraph="", graph_type="STE"):
     # Update skillset and required_skillset with string representation
     experts_df['skillset'] = [str(row) for row in experts_df['skills']]
     teams_df['required_skillset'] = [str(row) for row in teams_df["required_skills"]]
-    teams_df['location'] = [row[0] for row in teams_df["location"]]
+    if graph_type == "STEL" : teams_df['location'] = [row[0] for row in teams_df["location"]]
 
     # Create skill mapping
     all_skills = set(skill for skills_list in experts_df['skills'] for skill in skills_list)
@@ -31,7 +31,7 @@ def main(experts_df, teams_df, path, full_subgraph="", graph_type="STE"):
         data['expert'].node_id = torch.tensor(experts_df["user_id"].values, dtype=torch.long)
         data['skill'].node_id = torch.tensor(skills_df["skill_id"].values, dtype=torch.long)
         data['expert', 'has', 'skill'].edge_index = edge_index_expert_skill
-        data['expert', 'has', 'skill'].edge_attr = None
+        data['expert', 'has', 'skill'].edge_attr = torch.ones(data['expert', 'has', 'skill'].edge_index.shape[1])   # needed for gine
 
         if not full_subgraph == "":
             expert_pairs = []
@@ -94,14 +94,14 @@ def main(experts_df, teams_df, path, full_subgraph="", graph_type="STE"):
         data['team', 'requires', 'skill'].edge_index = edge_index_team_skill
         data['team', 'includes', 'expert'].edge_index = edge_index_team_experts
         data['expert', 'has', 'skill'].edge_index = edge_index_expert_skill
-        data['team', 'requires', 'skill'].edge_attr = None
-        data['team', 'includes', 'expert'].edge_attr = None
-        data['expert', 'has', 'skill'].edge_attr = None
+        data['team', 'requires', 'skill'].edge_attr = torch.ones(data['team', 'requires', 'skill'].edge_index.shape[1])     # needed for gine
+        data['team', 'includes', 'expert'].edge_attr = torch.ones(data['team', 'includes', 'expert'].edge_index.shape[1])   # needed for gine
+        data['expert', 'has', 'skill'].edge_attr = torch.ones(data['expert', 'has', 'skill'].edge_index.shape[1])           # needed for gine
 
         if graph_type == "STEL":
             data['location'].node_id = torch.tensor(teams_df["location"].values, dtype=torch.long)
             data['team', 'located_at', 'location'].edge_index = edge_index_team_location
-            data['team', 'located_at', 'location'].edge_attr = None
+            data['team', 'located_at', 'location'].edge_attr = torch.ones(data['team', 'located_at', 'location'].edge_index.shape[1])   # needed for gine
 
         if not full_subgraph == "":
             expert_pairs = []
@@ -174,12 +174,12 @@ def teams_df_from_teamsvec(teamsvec):
     # Get the non-zero indices for skills, members, and locations
     skill_nonzero = teamsvec['skill'].nonzero()
     member_nonzero = teamsvec['member'].nonzero()
-    location_nonzero = teamsvec['loc'].nonzero()
+    if 'loc' in teamsvec: location_nonzero = teamsvec['loc'].nonzero()
 
     # Create dictionaries to map each team to its skills, members, and location
     team_to_skills = {i: [] for i in range(teamsvec['id'].shape[0])}
     team_to_members = {i: [] for i in range(teamsvec['id'].shape[0])}
-    team_to_location = {i: [] for i in range(teamsvec['id'].shape[0])}
+    if 'loc' in teamsvec: team_to_location = {i: [] for i in range(teamsvec['id'].shape[0])}
 
     # Populate the dictionaries
     for skill_row, skill_col in tqdm(zip(skill_nonzero[0], skill_nonzero[1]), total=len(skill_nonzero[0]),
@@ -190,16 +190,26 @@ def teams_df_from_teamsvec(teamsvec):
                                        desc="Processing members"):
         team_to_members[member_row].append(member_col)
 
-    for loc_row, loc_col in tqdm(zip(location_nonzero[0], location_nonzero[1]), total=len(location_nonzero[0]),
-                                 desc="Processing locations"):
-        team_to_location[loc_row].append(loc_col)
+    if 'loc' in teamsvec:
+        for loc_row, loc_col in tqdm(zip(location_nonzero[0], location_nonzero[1]), total=len(location_nonzero[0]),
+                                     desc="Processing locations"):
+            team_to_location[loc_row].append(loc_col)
 
-    # Create a list of lists for DataFrame creation
-    teams_sorted = [[team_id, team_to_skills[team_id], team_to_members[team_id], team_to_location[team_id]] for team_id
-                    in range(teamsvec['id'].shape[0])]
+    if 'loc' in teamsvec:
+        # Create a list of lists for DataFrame creation
+        teams_sorted = [[team_id, team_to_skills[team_id], team_to_members[team_id], team_to_location[team_id]] for team_id
+                        in range(teamsvec['id'].shape[0])]
+    else:
+        teams_sorted = [[team_id, team_to_skills[team_id], team_to_members[team_id]] for
+                        team_id
+                        in range(teamsvec['id'].shape[0])]
 
-    # Create the DataFrame
-    teams_sorted_df = pd.DataFrame(teams_sorted, columns=['team_id', 'required_skills', 'members', 'location'])
+    if 'loc' in teamsvec:
+        # Create the DataFrame
+        teams_sorted_df = pd.DataFrame(teams_sorted, columns=['team_id', 'required_skills', 'members', 'location'])
+    else:
+        teams_sorted_df = pd.DataFrame(teams_sorted, columns=['team_id', 'required_skills', 'members'])
+
     return teams_sorted_df
 
 # def teams_df_from_teamsvec(teamsvec):
