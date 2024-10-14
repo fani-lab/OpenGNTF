@@ -51,7 +51,10 @@ def main(vecs, data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=6
                 rev_edge_types=('expert', 'rev_includes', 'team'),
             )
 
+
         train_data, val_data, test_data = transform(data)
+        test_data = update_test_split_with_all_experts(test_data, vecs, team_ratio = 0.8) # we try to manually increase the number of edges in the test split
+
         print("saving splitted files")
         with open(f"../output/NewSplitMethod/{dataset_name}/train.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt", "wb") as f:
             torch.save(train_data, f)
@@ -423,8 +426,8 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
         # Ensure no empty skill lists are kept
         skills_of_teams = {team: skills for team, skills in skills_of_teams.items() if skills}
 
-
-    for i, sampled_data in enumerate(test_loader):
+    print(f'Traversing Test Loader ...')
+    for i, sampled_data in tqdm(enumerate(test_loader)):
         with torch.no_grad():
             sampled_data = sampled_data.to(device)
             pred = torch.sigmoid(model(sampled_data)).cpu().numpy()
@@ -494,6 +497,117 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
     except Exception as e:
         print(f'Error evaluating metrics: {e}')
 
+'''
+
+*** Only implemented for STE ***
+
+update_test_split : Updates the existing test_split with more test edges based on some criteria
+
+vecs : the 1-hot matrix needed to fetch the ground truth experts for the test teams
+team_ratio : the ratio of the test teams to be picked from the test split, to find their corresponding `True Experts`
+
+The primary reason to update the existing test_split is due to the necessity of predicting probabilities
+against all possible experts for each team. Because we filter out the top k probabilities from all expert probabilities 
+for a team, we need to have that many labeled edges in the test split. Currently this huge number of labeled edges 
+(num_test_teams * total number of experts) are not possible, because that will force the model to predict for that many edges 
+throughout the test phase. So, we now take the unique test team indices, then fetch the corresponding ground truth 
+expert 1-hot vectors from `vecs`, and then modify the existing edge_label_index of the test_split with the ground truths and
+remaining number of negative edges (the edges that do not exist). Now the total size of the prediction edges will be =  
+(max possible (m) true experts found for a single team in the test split + another `m` experts which do not exist for each team)
+
+'''
+def update_test_split(test_split, vecs, team_ratio = 0.8):
+
+    import math
+
+    test_team_indices = list(set(np.asarray(test_split['team', 'includes', 'expert'].edge_label_index[0]))) # indices of the test teams in the test split edge_label_index
+    test_team_indices_trimmed = np.sort(np.random.choice(test_team_indices, size = int(math.floor(len(test_team_indices) * 0.8)), replace = False)) # subset of the actual indices selected to be the new test teams
+    test_team_experts = np.asarray(vecs['member'][test_team_indices_trimmed].todense()) # corresponding experts of the team indices from above
+    num_test_teams = test_team_indices_trimmed.shape[0] # total number of test teams
+    num_max_experts = int(np.max(np.sum(test_team_experts, axis = 1))) # max possible (m) true experts found for a single team in the test split
+    num_total_edges = num_max_experts * 2  # actual maximum experts + equal number of negative samples (or more depending on the deficit of true labels)
+
+    edge_label_index = [[], []]  # To store the rows: Team nodes and Expert nodes
+    edge_label = []  # To store the edge labels: 1 for true edges, 0 for false edges
+
+    for row_idx, team_idx in tqdm(enumerate(test_team_indices_trimmed)): # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
+        # Get indices of true edges (where the value is 1)
+        true_expert_indices = np.where(test_team_experts[row_idx] == 1)[0] # The test team matrix is arranged in the ascending order of the team indices
+        num_true_edges = len(true_expert_indices)
+
+        # Limit the number of true edges to max_experts
+        num_true_edges_to_add = min(num_true_edges, num_max_experts) # This can be less than the max number of possible experts for a single team
+        selected_true_experts = true_expert_indices[:num_true_edges_to_add]
+
+        # Add the true edges to edge_label_index and labels
+        edge_label_index[0].extend([team_idx] * num_true_edges_to_add)
+        edge_label_index[1].extend(selected_true_experts)
+        edge_label.extend([1] * num_true_edges_to_add)
+
+        # Get indices of false edges (where the value is 0)
+        false_expert_indices = np.where(test_team_experts[row_idx] == 0)[0]
+        num_false_edges_to_add = abs(num_true_edges_to_add - num_max_experts) + num_max_experts # Based on the number of already added true edges
+
+        # Randomly sample false edges (experts with 0 value)
+        selected_false_experts = np.random.choice(false_expert_indices, num_false_edges_to_add, replace=False)
+
+        # Add the false edges to edge_label_index and labels
+        edge_label_index[0].extend([team_idx] * num_false_edges_to_add)
+        edge_label_index[1].extend(selected_false_experts)
+        edge_label.extend([0] * num_false_edges_to_add)
+
+        # Convert edge_label_index to a tensor for PyG compatibility
+    edge_label_index = torch.tensor(edge_label_index, dtype=torch.long)
+    edge_label = torch.tensor(edge_label, dtype=torch.float)
+
+    test_split['team','includes','expert'].edge_label_index = edge_label_index
+    test_split['team','includes','expert'].edge_label = edge_label
+    test_split.validate(raise_on_error = True)
+
+    return test_split
+
+
+# The update_test_split function which includes
+# all experts in the prediction and also includes all the test teams, i.e. : team_ratio = 1.0
+def update_test_split_with_all_experts(test_split, vecs, team_ratio=1.0):
+
+    import math
+
+    test_team_indices = list(set(np.asarray(test_split['team', 'includes', 'expert'].edge_label_index[0])))  # indices of the test teams in the test split edge_label_index
+    test_team_experts = np.asarray(vecs['member'][test_team_indices].todense())  # corresponding experts of the team indices from above
+    num_test_teams = len(test_team_indices)  # total number of test teams
+
+    edge_label_index = [[], []]  # To store the rows: Team nodes and Expert nodes
+    edge_label = []  # To store the edge labels: 1 for true edges, 0 for false edges
+
+    for row_idx, team_idx in tqdm(enumerate(test_team_indices)):  # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
+        # Get indices of true edges (where the value is 1)
+        true_expert_indices = np.where(test_team_experts[row_idx] == 1)[0]  # The test team matrix is arranged in the ascending order of the team indices
+        num_true_edges = len(true_expert_indices)
+
+        # Add the true edges to edge_label_index and labels
+        edge_label_index[0].extend([team_idx] * num_true_edges)
+        edge_label_index[1].extend(true_expert_indices)
+        edge_label.extend([1] * num_true_edges)
+
+        # Get indices of false edges (where the value is 0)
+        false_expert_indices = np.where(test_team_experts[row_idx] == 0)[0]
+        num_false_edges = len(false_expert_indices)
+
+        # Add the false edges to edge_label_index and labels
+        edge_label_index[0].extend([team_idx] * num_false_edges)
+        edge_label_index[1].extend(false_expert_indices)
+        edge_label.extend([0] * num_false_edges)
+
+        # Convert edge_label_index to a tensor for PyG compatibility
+    edge_label_index = torch.tensor(edge_label_index, dtype=torch.long)
+    edge_label = torch.tensor(edge_label, dtype=torch.float)
+
+    test_split['team', 'includes', 'expert'].edge_label_index = edge_label_index
+    test_split['team', 'includes', 'expert'].edge_label = edge_label
+    test_split.validate(raise_on_error=True)
+
+    return test_split
 
 # calculate skill_coverage for k = [2, 5, 10] for example
 def calculate_skill_coverage(vecs, actual_skills, Y_, top_k):
