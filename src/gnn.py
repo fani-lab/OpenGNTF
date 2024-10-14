@@ -57,9 +57,8 @@ def main(vecs, data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=6
             )
 
         train_data, val_data, test_data = transform(data)
-        # if graph_type != "SE":
-        #     test_data = update_test_split_with_all_experts(test_data, vecs,
-        #                                                    team_ratio=0.8)  # we try to manually increase the number of edges in the test split
+        if graph_type != "SE":
+            test_data = update_test_split_with_all_experts(test_data, vecs, team_ratio=0.8)  # we try to manually increase the number of edges in the test split
 
         print("saving splitted files")
         with open(
@@ -137,9 +136,12 @@ def main(vecs, data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=6
         num_neighbors={key: [-1] for key in test_data.edge_types} if num_neighbors is None else num_neighbors,
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
-        batch_size=batch_size,
+        batch_size=batch_size * 10000,
         shuffle=False,
     )
+
+    print(f'Number of test_loader batches after expansion : {len(test_loader)}')
+    print(f'Test Loader batch size after expansion : {batch_size * 10000}')
 
     for epoch in range(epochs):
         total_loss = total_examples = 0
@@ -292,7 +294,7 @@ def create_qrel_and_run(node1_index, node2_index, predictions, ground_truth, gra
     print("Sorting...")
     # Sort combined elements by predictions using numpy for efficiency
     combined_sorted = sorted(zip(node1_index, node2_index, predictions, ground_truth), key=lambda x: x[2], reverse=True)
-    print("Creating qrel and run dictionaries...")
+    print(f"Creating qrel and run dictionaries from {len(combined_sorted)} predictions ...")
 
     qrel = defaultdict(dict)
     run = defaultdict(dict)
@@ -600,23 +602,21 @@ def update_test_split(test_split, vecs, team_ratio=0.8):
 
 # The update_test_split function which includes
 # all experts in the prediction and also includes all the test teams, i.e. : team_ratio = 1.0
-def update_test_split_with_all_experts(test_split, vecs, team_ratio=1.0):
+def update_test_split_with_all_experts(test_split, vecs, team_ratio=0.8):
     import math
 
-    test_team_indices = list(set(np.asarray(test_split['team', 'includes', 'expert'].edge_label_index[
-                                                0])))  # indices of the test teams in the test split edge_label_index
-    test_team_experts = np.asarray(
-        vecs['member'][test_team_indices].todense())  # corresponding experts of the team indices from above
-    num_test_teams = len(test_team_indices)  # total number of test teams
+    test_team_indices = list(set(np.asarray(test_split['team', 'includes', 'expert'].edge_label_index[0])))  # indices of the test teams in the test split edge_label_index
+    num_test_teams = math.floor(len(test_team_indices) * team_ratio) # the number of teams after trimming
+    test_team_indices = np.sort(np.random.choice(test_team_indices, size=num_test_teams, replace=False)) # trimmed list of test teams
+
+    test_team_experts = np.asarray(vecs['member'][test_team_indices].todense())  # corresponding experts of the team indices from above
 
     edge_label_index = [[], []]  # To store the rows: Team nodes and Expert nodes
     edge_label = []  # To store the edge labels: 1 for true edges, 0 for false edges
 
-    for row_idx, team_idx in tqdm(enumerate(
-            test_team_indices)):  # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
+    for row_idx, team_idx in tqdm(enumerate(test_team_indices)):  # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
         # Get indices of true edges (where the value is 1)
-        true_expert_indices = np.where(test_team_experts[row_idx] == 1)[
-            0]  # The test team matrix is arranged in the ascending order of the team indices
+        true_expert_indices = np.where(test_team_experts[row_idx] == 1)[0]  # The test team matrix is arranged in the ascending order of the team indices
         num_true_edges = len(true_expert_indices)
 
         # Add the true edges to edge_label_index and labels
