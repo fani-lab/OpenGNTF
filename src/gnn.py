@@ -57,9 +57,9 @@ def main(vecs, data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=6
             )
 
         train_data, val_data, test_data = transform(data)
-        if graph_type != "SE":
-            test_data = update_test_split_with_all_experts(test_data, vecs,
-                                                           team_ratio=0.8)  # we try to manually increase the number of edges in the test split
+        # if graph_type != "SE":
+        #     test_data = update_test_split_with_all_experts(test_data, vecs,
+        #                                                    team_ratio=0.8)  # we try to manually increase the number of edges in the test split
 
         print("saving splitted files")
         with open(
@@ -359,7 +359,7 @@ def create_qrel_and_run_with_skc(vecs, node1_index, node2_index, predictions, gr
         qrel[str(idx1)][str(idx2)] = label_int
         run[str(idx1)][str(idx2)] = float(pred)  # Ensure the prediction is a float
         idx1_mapped = team_indices_serialized[idx1]  # Map the actual index to the sorted serial of the team
-        Y_[idx1_mapped][idx2] = int(label)  # Update the relevant rows with pred and labels
+        Y_[idx1_mapped][idx2] = float(pred)  # Update the relevant rows with preds
 
     # Convert defaultdict back to regular dict
     return dict(qrel), dict(run), Y_, actual_skills
