@@ -456,8 +456,8 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
                 node2_index = sampled_data['expert', 'has', 'skill'].edge_index[1, :].cpu().numpy()  # Skill
             else:
                 ground_truth = sampled_data['team', 'includes', 'expert'].edge_label.cpu().numpy()
-                node1_index = sampled_data['team', 'includes', 'expert'].edge_index[0, :].cpu().numpy()  # team
-                node2_index = sampled_data['team', 'includes', 'expert'].edge_index[1, :].cpu().numpy()  # expert
+                node1_index = sampled_data['team', 'includes', 'expert'].edge_label_index[0, :].cpu().numpy()  # team
+                node2_index = sampled_data['team', 'includes', 'expert'].edge_label_index[1, :].cpu().numpy()  # expert
 
             all_node1_index.extend(node1_index)
             all_node2_index.extend(node2_index)
