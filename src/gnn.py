@@ -426,8 +426,8 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
         # Ensure no empty skill lists are kept
         skills_of_teams = {team: skills for team, skills in skills_of_teams.items() if skills}
 
-
-    for i, sampled_data in enumerate(test_loader):
+    print(f'Traversing Test Loader ...')
+    for i, sampled_data in tqdm(enumerate(test_loader)):
         with torch.no_grad():
             sampled_data = sampled_data.to(device)
             pred = torch.sigmoid(model(sampled_data)).cpu().numpy()
@@ -530,7 +530,7 @@ def update_test_split(test_split, vecs, team_ratio = 0.8):
     edge_label_index = [[], []]  # To store the rows: Team nodes and Expert nodes
     edge_label = []  # To store the edge labels: 1 for true edges, 0 for false edges
 
-    for row_idx, team_idx in enumerate(test_team_indices_trimmed): # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
+    for row_idx, team_idx in tqdm(enumerate(test_team_indices_trimmed)): # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
         # Get indices of true edges (where the value is 1)
         true_expert_indices = np.where(test_team_experts[row_idx] == 1)[0] # The test team matrix is arranged in the ascending order of the team indices
         num_true_edges = len(true_expert_indices)
@@ -580,7 +580,7 @@ def update_test_split_with_all_experts(test_split, vecs, team_ratio=1.0):
     edge_label_index = [[], []]  # To store the rows: Team nodes and Expert nodes
     edge_label = []  # To store the edge labels: 1 for true edges, 0 for false edges
 
-    for row_idx, team_idx in enumerate(test_team_indices):  # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
+    for row_idx, team_idx in tqdm(enumerate(test_team_indices)):  # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
         # Get indices of true edges (where the value is 1)
         true_expert_indices = np.where(test_team_experts[row_idx] == 1)[0]  # The test team matrix is arranged in the ascending order of the team indices
         num_true_edges = len(true_expert_indices)
