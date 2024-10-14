@@ -352,7 +352,7 @@ def create_qrel_and_run_with_skc(vecs, node1_index, node2_index, predictions, gr
     combined_sorted = sorted(zip(node1_index, node2_index, predictions, ground_truth), key=lambda x: x[2],
                              reverse=True)  # Sort combined elements by predictions using numpy for efficiency
 
-    print("Creating qrel and run dictionaries...")
+    print(f"Creating qrel and run dictionaries from {len(combined_sorted)} predictions ...")
     qrel = defaultdict(dict)
     run = defaultdict(dict)
 
