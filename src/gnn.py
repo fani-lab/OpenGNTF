@@ -24,12 +24,17 @@ from gine import GINE
 
 from torch.nn import Linear, Sequential, BatchNorm1d, ReLU
 
+
 # we need vecs for skill coverage
-def main(vecs, data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE", dim=64, num_neighbors=None, gnn_model="gs", eval_method="sum"):
+def main(vecs, data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=64, full_subgraph="", graph_type="STE",
+         dim=64, num_neighbors=None, gnn_model="gs", eval_method="sum"):
     try:
-        train_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/train.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
-        val_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/val.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
-        test_data = torch.load(f'../output/NewSplitMethod/{dataset_name}/test.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
+        train_data = torch.load(
+            f'../output/NewSplitMethod/{dataset_name}/train.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
+        val_data = torch.load(
+            f'../output/NewSplitMethod/{dataset_name}/val.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
+        test_data = torch.load(
+            f'../output/NewSplitMethod/{dataset_name}/test.fs{full_subgraph}.{graph_type}.nn{num_neighbors}.pt')
         print('splitted data loaded')
     except:
         print('splitting data')
@@ -51,18 +56,25 @@ def main(vecs, data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=6
                 rev_edge_types=('expert', 'rev_includes', 'team'),
             )
 
-
         train_data, val_data, test_data = transform(data)
-        test_data = update_test_split_with_all_experts(test_data, vecs, team_ratio = 0.8) # we try to manually increase the number of edges in the test split
+        if graph_type != "SE":
+            test_data = update_test_split_with_all_experts(test_data, vecs,
+                                                           team_ratio=0.8)  # we try to manually increase the number of edges in the test split
 
         print("saving splitted files")
-        with open(f"../output/NewSplitMethod/{dataset_name}/train.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt", "wb") as f:
+        with open(
+                f"../output/NewSplitMethod/{dataset_name}/train.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt",
+                "wb") as f:
             torch.save(train_data, f)
-        with open(f"../output/NewSplitMethod/{dataset_name}/val.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt", "wb") as f:
+        with open(
+                f"../output/NewSplitMethod/{dataset_name}/val.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt",
+                "wb") as f:
             torch.save(val_data, f)
-        with open(f"../output/NewSplitMethod/{dataset_name}/test.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt", "wb") as f:
+        with open(
+                f"../output/NewSplitMethod/{dataset_name}/test.fs{0 if full_subgraph == '' else 1}.{graph_type}.nn{num_neighbors}.pt",
+                "wb") as f:
             torch.save(test_data, f)
-    
+
     model = Model(hidden_channels=dim, data=train_data, graph_type=graph_type, gnn_model=gnn_model)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # device = 'cpu'
@@ -107,7 +119,7 @@ def main(vecs, data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=6
         num_neighbors={key: [-1] for key in val_data.edge_types} if num_neighbors is None else num_neighbors,
         edge_label_index=(edge_type, edge_label_index),
         edge_label=edge_label,
-        batch_size= batch_size,
+        batch_size=batch_size,
         shuffle=False,
     )
 
@@ -178,10 +190,12 @@ def main(vecs, data, dataset_name, epochs=25, lr=0.001, test=False, batch_size=6
 
     if test:
         evaluate(model, vecs, test_loader, device,
-                 f"../output/NewSplitMethod/{dataset_name}/eval.{gnn_model}.e{epochs}.lr{lr}.d{dim}.nn{num_neighbors}.fs{0 if full_subgraph == '' else 1}.{graph_type}.{eval_method}.csv", full_subgraph, num_neighbors, graph_type, eval_method)
+                 f"../output/NewSplitMethod/{dataset_name}/eval.{gnn_model}.e{epochs}.lr{lr}.d{dim}.nn{num_neighbors}.fs{0 if full_subgraph == '' else 1}.{graph_type}.{eval_method}.csv",
+                 full_subgraph, num_neighbors, graph_type, eval_method)
         # print(f"Test evaluation results:\n{df_mean}")
 
     return model
+
 
 # torch.manual_seed(42) already defined seed in main.py
 
@@ -315,38 +329,41 @@ we will pick the top_k index based on the value of k = 2, 5 or 10. In this way, 
 
 """
 
+
 # create qrel and run with skills covered
 def create_qrel_and_run_with_skc(vecs, node1_index, node2_index, predictions, ground_truth, graph_type):
-
     # node1_index => team
     # node2_index => expert
 
-    n_teams = vecs['id'].shape[0]           # total number of teams
-    n_skills = vecs['skill'].shape[1]       # total number of skills
-    n_experts = vecs['member'].shape[1]     # total number of experts
-    team_indices = list(set(node1_index))   # The test team indices
+    n_teams = vecs['id'].shape[0]  # total number of teams
+    n_skills = vecs['skill'].shape[1]  # total number of skills
+    n_experts = vecs['member'].shape[1]  # total number of experts
+    team_indices = list(set(node1_index))  # The test team indices
     team_indices_serialized = {team: serial for serial, team in enumerate(team_indices)}
 
-    vecs['es_vecs'] = lil_matrix(np.where(np.dot(vecs['member'].transpose(), vecs['skill']).todense() > 0, 1, 0))     # Create expert-skill co-occurrence matrix
-    actual_skills = vecs['skill'][team_indices].todense().astype(int)                                                 # Collecting actual skills of the test teams
-    Y_ = torch.zeros((len(set(node1_index)), n_experts), dtype = float)                 # Corresponding predictions
+    vecs['es_vecs'] = lil_matrix(np.where(np.dot(vecs['member'].transpose(), vecs['skill']).todense() > 0, 1,
+                                          0))  # Create expert-skill co-occurrence matrix
+    actual_skills = vecs['skill'][team_indices].todense().astype(int)  # Collecting actual skills of the test teams
+    Y_ = torch.zeros((len(set(node1_index)), n_experts), dtype=float)  # Corresponding predictions
 
     print("Sorting...")
-    combined_sorted = sorted(zip(node1_index, node2_index, predictions, ground_truth), key=lambda x: x[2], reverse=True)    # Sort combined elements by predictions using numpy for efficiency
+    combined_sorted = sorted(zip(node1_index, node2_index, predictions, ground_truth), key=lambda x: x[2],
+                             reverse=True)  # Sort combined elements by predictions using numpy for efficiency
 
     print("Creating qrel and run dictionaries...")
     qrel = defaultdict(dict)
     run = defaultdict(dict)
 
     for idx1, idx2, pred, label in tqdm(combined_sorted, desc="Processing qrels and runs"):
-        label_int = int(label)                      # Ensure the label is an integer
+        label_int = int(label)  # Ensure the label is an integer
         qrel[str(idx1)][str(idx2)] = label_int
-        run[str(idx1)][str(idx2)] = float(pred)     # Ensure the prediction is a float
-        idx1_mapped = team_indices_serialized[idx1] # Map the actual index to the sorted serial of the team
-        Y_[idx1_mapped][idx2] = int(label)          # Update the relevant rows with pred and labels
+        run[str(idx1)][str(idx2)] = float(pred)  # Ensure the prediction is a float
+        idx1_mapped = team_indices_serialized[idx1]  # Map the actual index to the sorted serial of the team
+        Y_[idx1_mapped][idx2] = int(label)  # Update the relevant rows with pred and labels
 
     # Convert defaultdict back to regular dict
     return dict(qrel), dict(run), Y_, actual_skills
+
 
 def merge_predictions(skills_list, preds, method):  # method:  "sum" / "fusion"
     # Use defaultdict with float for accumulation
@@ -364,7 +381,6 @@ def merge_predictions(skills_list, preds, method):  # method:  "sum" / "fusion"
                     predicts[expert_key] += expert_prob_value
                 else:
                     predicts[expert_key] = expert_prob_value
-
 
     # Create a tensor for sorting
     sorted_predicts = sorted(predicts.items(), key=lambda x: x[1], reverse=True)
@@ -390,8 +406,10 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
     if graph_type == "SE":
 
         # Load data
-        test_STE = torch.load(f'../output/NewSplitMethod/{saving_path.split("/")[3]}/test.fs{0 if full_subgraph == "" else 1}.STE.nn{num_neighbors}.pt')
-        test_SE = torch.load(f'../output/NewSplitMethod/{saving_path.split("/")[3]}/test.fs{0 if full_subgraph == "" else 1}.SE.nn{num_neighbors}.pt')
+        test_STE = torch.load(
+            f'../output/NewSplitMethod/{saving_path.split("/")[3]}/test.fs{0 if full_subgraph == "" else 1}.STE.nn{num_neighbors}.pt')
+        test_SE = torch.load(
+            f'../output/NewSplitMethod/{saving_path.split("/")[3]}/test.fs{0 if full_subgraph == "" else 1}.SE.nn{num_neighbors}.pt')
 
         # Extract indices
         test_SE_experts = test_SE['expert', 'has', 'skill'].edge_index[0, :]
@@ -447,8 +465,9 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
             all_ground_truth.extend(ground_truth)
 
     if graph_type == "SE":
-        qrels_, runs_, Y_, actual_skills = create_qrel_and_run_with_skc(vecs, all_node2_index, all_node1_index, all_predictions, all_ground_truth,
-                                            graph_type)
+        qrels_, runs_, Y_, actual_skills = create_qrel_and_run_with_skc(vecs, all_node2_index, all_node1_index,
+                                                                        all_predictions, all_ground_truth,
+                                                                        graph_type)
         qrels = {}
 
         for team_id_, expert_id_ in zip(test_teams_index, test_teams_experts_index):
@@ -460,8 +479,9 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
         runs = create_runs_for_SE(skills_of_teams, runs_, eval_method=eval_method)
 
     else:
-        qrels, runs, Y_, actual_skills = create_qrel_and_run_with_skc(vecs, all_node1_index, all_node2_index, all_predictions, all_ground_truth,
-                                          graph_type)
+        qrels, runs, Y_, actual_skills = create_qrel_and_run_with_skc(vecs, all_node1_index, all_node2_index,
+                                                                      all_predictions, all_ground_truth,
+                                                                      graph_type)
     # del qrels_, runs_
 
     skill_coverage = calculate_skill_coverage(vecs, actual_skills, Y_, [2, 5, 10])
@@ -497,6 +517,7 @@ def evaluate(model, vecs, test_loader, device, saving_path, full_subgraph, num_n
     except Exception as e:
         print(f'Error evaluating metrics: {e}')
 
+
 '''
 
 *** Only implemented for STE ***
@@ -516,27 +537,36 @@ remaining number of negative edges (the edges that do not exist). Now the total 
 (max possible (m) true experts found for a single team in the test split + another `m` experts which do not exist for each team)
 
 '''
-def update_test_split(test_split, vecs, team_ratio = 0.8):
 
+
+def update_test_split(test_split, vecs, team_ratio=0.8):
     import math
 
-    test_team_indices = list(set(np.asarray(test_split['team', 'includes', 'expert'].edge_label_index[0]))) # indices of the test teams in the test split edge_label_index
-    test_team_indices_trimmed = np.sort(np.random.choice(test_team_indices, size = int(math.floor(len(test_team_indices) * 0.8)), replace = False)) # subset of the actual indices selected to be the new test teams
-    test_team_experts = np.asarray(vecs['member'][test_team_indices_trimmed].todense()) # corresponding experts of the team indices from above
-    num_test_teams = test_team_indices_trimmed.shape[0] # total number of test teams
-    num_max_experts = int(np.max(np.sum(test_team_experts, axis = 1))) # max possible (m) true experts found for a single team in the test split
+    test_team_indices = list(set(np.asarray(test_split['team', 'includes', 'expert'].edge_label_index[
+                                                0])))  # indices of the test teams in the test split edge_label_index
+    test_team_indices_trimmed = np.sort(
+        np.random.choice(test_team_indices, size=int(math.floor(len(test_team_indices) * 0.8)),
+                         replace=False))  # subset of the actual indices selected to be the new test teams
+    test_team_experts = np.asarray(
+        vecs['member'][test_team_indices_trimmed].todense())  # corresponding experts of the team indices from above
+    num_test_teams = test_team_indices_trimmed.shape[0]  # total number of test teams
+    num_max_experts = int(np.max(
+        np.sum(test_team_experts, axis=1)))  # max possible (m) true experts found for a single team in the test split
     num_total_edges = num_max_experts * 2  # actual maximum experts + equal number of negative samples (or more depending on the deficit of true labels)
 
     edge_label_index = [[], []]  # To store the rows: Team nodes and Expert nodes
     edge_label = []  # To store the edge labels: 1 for true edges, 0 for false edges
 
-    for row_idx, team_idx in tqdm(enumerate(test_team_indices_trimmed)): # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
+    for row_idx, team_idx in tqdm(enumerate(
+            test_team_indices_trimmed)):  # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
         # Get indices of true edges (where the value is 1)
-        true_expert_indices = np.where(test_team_experts[row_idx] == 1)[0] # The test team matrix is arranged in the ascending order of the team indices
+        true_expert_indices = np.where(test_team_experts[row_idx] == 1)[
+            0]  # The test team matrix is arranged in the ascending order of the team indices
         num_true_edges = len(true_expert_indices)
 
         # Limit the number of true edges to max_experts
-        num_true_edges_to_add = min(num_true_edges, num_max_experts) # This can be less than the max number of possible experts for a single team
+        num_true_edges_to_add = min(num_true_edges,
+                                    num_max_experts)  # This can be less than the max number of possible experts for a single team
         selected_true_experts = true_expert_indices[:num_true_edges_to_add]
 
         # Add the true edges to edge_label_index and labels
@@ -546,7 +576,8 @@ def update_test_split(test_split, vecs, team_ratio = 0.8):
 
         # Get indices of false edges (where the value is 0)
         false_expert_indices = np.where(test_team_experts[row_idx] == 0)[0]
-        num_false_edges_to_add = abs(num_true_edges_to_add - num_max_experts) + num_max_experts # Based on the number of already added true edges
+        num_false_edges_to_add = abs(
+            num_true_edges_to_add - num_max_experts) + num_max_experts  # Based on the number of already added true edges
 
         # Randomly sample false edges (experts with 0 value)
         selected_false_experts = np.random.choice(false_expert_indices, num_false_edges_to_add, replace=False)
@@ -560,9 +591,9 @@ def update_test_split(test_split, vecs, team_ratio = 0.8):
     edge_label_index = torch.tensor(edge_label_index, dtype=torch.long)
     edge_label = torch.tensor(edge_label, dtype=torch.float)
 
-    test_split['team','includes','expert'].edge_label_index = edge_label_index
-    test_split['team','includes','expert'].edge_label = edge_label
-    test_split.validate(raise_on_error = True)
+    test_split['team', 'includes', 'expert'].edge_label_index = edge_label_index
+    test_split['team', 'includes', 'expert'].edge_label = edge_label
+    test_split.validate(raise_on_error=True)
 
     return test_split
 
@@ -570,19 +601,22 @@ def update_test_split(test_split, vecs, team_ratio = 0.8):
 # The update_test_split function which includes
 # all experts in the prediction and also includes all the test teams, i.e. : team_ratio = 1.0
 def update_test_split_with_all_experts(test_split, vecs, team_ratio=1.0):
-
     import math
 
-    test_team_indices = list(set(np.asarray(test_split['team', 'includes', 'expert'].edge_label_index[0])))  # indices of the test teams in the test split edge_label_index
-    test_team_experts = np.asarray(vecs['member'][test_team_indices].todense())  # corresponding experts of the team indices from above
+    test_team_indices = list(set(np.asarray(test_split['team', 'includes', 'expert'].edge_label_index[
+                                                0])))  # indices of the test teams in the test split edge_label_index
+    test_team_experts = np.asarray(
+        vecs['member'][test_team_indices].todense())  # corresponding experts of the team indices from above
     num_test_teams = len(test_team_indices)  # total number of test teams
 
     edge_label_index = [[], []]  # To store the rows: Team nodes and Expert nodes
     edge_label = []  # To store the edge labels: 1 for true edges, 0 for false edges
 
-    for row_idx, team_idx in tqdm(enumerate(test_team_indices)):  # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
+    for row_idx, team_idx in tqdm(enumerate(
+            test_team_indices)):  # The test_team_experts matrix is sorted based on the test_team_indices, so we can access them by row_idx
         # Get indices of true edges (where the value is 1)
-        true_expert_indices = np.where(test_team_experts[row_idx] == 1)[0]  # The test team matrix is arranged in the ascending order of the team indices
+        true_expert_indices = np.where(test_team_experts[row_idx] == 1)[
+            0]  # The test team matrix is arranged in the ascending order of the team indices
         num_true_edges = len(true_expert_indices)
 
         # Add the true edges to edge_label_index and labels
@@ -609,27 +643,32 @@ def update_test_split_with_all_experts(test_split, vecs, team_ratio=1.0):
 
     return test_split
 
+
 # calculate skill_coverage for k = [2, 5, 10] for example
 def calculate_skill_coverage(vecs, actual_skills, Y_, top_k):
-
     print(f"Calculating Skill Coverage for {Y_.shape[0]} predictions")
 
     if not isinstance(vecs['es_vecs'], np.ndarray):
         vecs['es_vecs'] = np.where(np.asarray(vecs['es_vecs'].todense()) > 0, 1, 0)
     skill_coverage = {}
-    top_k_y_ = convert_to_one_hot(Y_, top_k) # convert the predicted experts to one-hot encodings based on top-k recommendations
+    top_k_y_ = convert_to_one_hot(Y_,
+                                  top_k)  # convert the predicted experts to one-hot encodings based on top-k recommendations
 
     # we have to calculate skill_coverage for each value in the list top_k (2, 5 and 10 for example)
     for k in top_k:
         print(f"---- Calculating skc for k = {k}")
-        Y_ = top_k_y_[k] # the 1-hot converted matrix for top k recommendations
+        Y_ = top_k_y_[k]  # the 1-hot converted matrix for top k recommendations
 
-        predicted_skills = np.where(np.dot(Y_, vecs['es_vecs']).astype(int) > 0, 1, 0)                                  # skill occurrence matrix of predicted members of shape (1 * |s|) for each row
-        skills_overlap = ((predicted_skills & actual_skills) > 0).astype(int)                                           # overlap of skills in each row between predicted and actual
-        skill_coverage[f'skc_{k}'] = np.average([r1.sum()/r2.sum() for r1,r2 in zip(skills_overlap,actual_skills)])     # avg coverage over all the predicted rows
+        predicted_skills = np.where(np.dot(Y_, vecs['es_vecs']).astype(int) > 0, 1,
+                                    0)  # skill occurrence matrix of predicted members of shape (1 * |s|) for each row
+        skills_overlap = ((predicted_skills & actual_skills) > 0).astype(
+            int)  # overlap of skills in each row between predicted and actual
+        skill_coverage[f'skc_{k}'] = np.average([r1.sum() / r2.sum() for r1, r2 in zip(skills_overlap,
+                                                                                       actual_skills)])  # avg coverage over all the predicted rows
         print(f"---- Calculated skc for k = {k}")
 
     return skill_coverage
+
 
 # convert the top k expert prediction probabilities into 1-hot occurrences
 # here top_k is a list of k's
@@ -642,10 +681,10 @@ def convert_to_one_hot(y_, top_k):
         result = np.zeros_like(y_)
 
         for i in tqdm(range(y_.shape[0])):
-            top_k_indices = np.argsort(y_[i])[-k:] # get the indices of the top k values
-            result[i, top_k_indices] = 1 # set the top k values to 1
+            top_k_indices = np.argsort(y_[i])[-k:]  # get the indices of the top k values
+            result[i, top_k_indices] = 1  # set the top k values to 1
 
         top_k_matrices[k] = result
         print(f"-------- Converted for k = {k}\n")
 
-    return top_k_matrices # |test_instances| * |num_test_instance_experts| for each k in top_k
+    return top_k_matrices  # |test_instances| * |num_test_instance_experts| for each k in top_k
