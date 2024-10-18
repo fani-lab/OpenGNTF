@@ -101,8 +101,7 @@ If the `experts.pkl` or `teams_sorted.pkl` files are not found, they will be gen
 Contributions are welcome! Feel free to open issues or submit pull requests to improve the project.
 
 ## License
-
-
+[MIT LICENSE](https://github.com/fani-lab/OpenGNTF/blob/main/LICENSE)
 
 ## Acknowledgments
 
