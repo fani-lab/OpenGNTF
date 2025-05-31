@@ -1,4 +1,17 @@
-# GNN Subgraph Training and Evaluation
+# Graph Neural Team Recommendation: Toward an Integrated End-2-End Approach
+
+Team recommendation methods have employed graph neural networks in recommending teams of experts to do a task at hand, given an input required skills. However, they suffer from: 
+>> The skill embeddings are pretrained `disjointedly` by a heterogeneous graph neural network on an expert collaboration graph, so, preventing end-to-end optimization for effective yet efficient prediction of the optimal subset of experts.
+
+>> Due to the large pool of experts in real-world scenarios, the feedforward classifier is adversely affected by the `high-dimensional multi-hot vector` in the output layer, where each label corresponds to an expert.
+
+In this project, we reformulate the team recommendation problem into an end-to-end `link prediction` task between expert nodes and the nodes for the required subset of skills in the expert collaboration graph, 
+>> Omittng the unnecessary complexities of a disjoint two-phase training procedure
+
+>> Addressing the curse of output sparsity arising from large pools of experts.
+
+Our experiments on large-scale datasets from various domains showcase the superiority of our proposed approach. See [Results](#Results) below.
+
 
 OpenGNTG focuses on training and evaluating Graph Neural Networks (GNNs) using subgraphs of different types (e.g., Skill/Team/Expert (STE), Skill/Expert (SE), and STEL). The pipeline processes datasets, prepares subgraph data, and trains specified GNN models with user-defined parameters.
 
