@@ -2,6 +2,9 @@
 
 OpenGNTG focuses on training and evaluating Graph Neural Networks (GNNs) using subgraphs of different types (e.g., Skill/Team/Expert (STE), Skill/Expert (SE), and STEL). The pipeline processes datasets, prepares subgraph data, and trains specified GNN models with user-defined parameters.
 
+![image](https://github.com/user-attachments/assets/4913d39e-1120-4182-b063-326c05aace8e)
+
+
 ## Features
 
 - **Subgraph Preparation**: Creates complete or non-complete subgraphs for different graph types.
@@ -96,14 +99,27 @@ The script expects the following data files in each dataset folder:
 
 If the `experts.pkl` or `teams_sorted.pkl` files are not found, they will be generated automatically using the provided `teamsvecs.pkl` file.
 
-## Contributing
+## Results
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/95980f62-df40-414b-bdda-a54bd7f401fa" alt="Image 1" width="150" />
+   <img src="https://github.com/user-attachments/assets/503f1788-35e7-45b4-887d-fafd665869da" alt="Image 2" width="800"/></p>
+<br>
 
-Contributions are welcome! Feel free to open issues or submit pull requests to improve the project.
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/74252e18-2a97-4390-8783-5870ce6438e3" alt="Image 1" width="150" />
+   <img src="https://github.com/user-attachments/assets/42b0177c-c739-4184-9bb1-7ac0b6a8eaee" alt="Image 1" width="400" />
+</p>
+
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/2c0faf6d-8697-4e86-973e-a69a3e61a02c" alt="Image 1" width="150" />
+   <img src="https://github.com/user-attachments/assets/fa0bf77a-44cd-4881-b5e6-21c793fcc4d8" alt="Image 1" width="800" />
+</p>
 
 ## License
 [MIT LICENSE](https://github.com/fani-lab/OpenGNTF/blob/main/LICENSE)
 
 ## Acknowledgments
 
+- [PyG](https://pyg.org/)
 - [PyTorch](https://pytorch.org/)
 - Graph Neural Network models like GIN, GAT, and more.
